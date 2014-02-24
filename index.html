@@ -1,0 +1,71 @@
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="src/robin.js"></script>
+<style>
+.box {
+	display: inline-block;
+	width: 100px;
+	border: 10px solid #ccc;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #eee;
+}
+.box p:nth-child(1) {
+	color: red;
+}
+.box p:nth-child(2) {
+	color: blue;
+}
+.box p:nth-child(3) {
+	color: purple;
+}
+.key-editor {
+	padding: 10px;
+	border-color: 1px solid #c90;
+}
+</style>
+<div id="container">
+	<div class="key-editor">
+		<p>Edit a key on this view!</p>
+		Key
+		<input type="text" id="update-data-key">
+		Value
+		<input type="text" id="update-data-value">
+		<button id="update-data-button" type="button">Update Property</button>
+	</div>
+</div>
+<script src="src/playground.js"></script>
+<script>
+	/**
+		On this page we have Robin.js included as well as jQuery. This script functions as the
+		primary controller for our updateBox view.
+	*/
+
+	// Update key-value function
+	$('#update-data-button').on('click', function(e) {
+		e.preventDefault();
+		var keyValue = $('#update-data-key').val();
+		var valValue = $('#update-data-value').val();
+		updateBox.updateDataProperty(keyValue, valValue);
+	});
+
+	/**
+		EVENTS ASSIGNMENT!
+
+		LEVEL 1: Add a new .style-editor div that has two inputs for a CSS key and CSS value and a button,
+		   that when clicked, will trigger a custom event on the updateBox that will in response
+		   update the styles on updateBox.$element.
+		   Hint: You'll need to create a new method that works similarly to updateDataProperty().
+		LEVEL 2: Make it possible to pass arguments from .trigger() to the callback function of .on(). Using this,
+		   create a new event and modify the update key-vaue function in this script to use updateBox.trigger()
+		   instead of updateBox.updateDataProperty.
+		   Hint: You'll need to alter robin.js to achieve this. For bonus points, make it possible to pass more than one
+		   argument from .trigger() to .on().
+		LEVEL 3: Make another .ajax-call div that has one input for a URL and a button, that when clicked will
+		   make an AJAX call to the URL in that input. (You'll most likely need to request /, the url you're on
+		   due to Cross-Origin Resource Sharing policies.) When that AJAX function returns, update
+		   updateBox.data.description to equal the result of that GET request.
+	*/
+</script>
+
