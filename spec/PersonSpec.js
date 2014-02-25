@@ -1,4 +1,4 @@
-describe("Player", function() {
+describe("Person", function() {
   var person;
 
   it("should have a name", function() {
