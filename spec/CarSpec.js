@@ -33,6 +33,7 @@ describe("Car", function() {
 
   describe("A car without a driver", function() {
     var car;
+    var bob;
 
     beforeEach(function() {
       car = new Car('blue', bob);
