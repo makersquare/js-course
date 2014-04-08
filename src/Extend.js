@@ -1,2 +1,0 @@
-var extend = function() {
-};
