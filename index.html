@@ -1,19 +1,56 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Robin Starter</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <title>List Maker!</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script type="text/javascript"></script>
 </head>
 <body>
 
-<!-- HTML -->
+  <h1>List Maker</h1>
 
-<div id="templates">
-  <!-- TEMPLATES -->
-</div>
+  <!-- CREATE FORM -->
+  <form class="new-list-item">
+    <h3>Make a New Item <span class="error" style="display:none;"></span></h3>
+    Item Name: <input type="text" class="name" name="name" placeholder="Item Name (e.g. Get Groceries)" autocomplete="off" />
+    Task Category: <input type="text" class="category" name="category" placeholder="Category (1 is highest - 1, 2, 3)" autocomplete="off" />
+    <input type="submit" class="submit" value="Create!" />
+  </form>
 
-<script src="vendor/js/jquery-1.10.2.min.js"></script>
-<script src="vendor/js/robin.js"></script>
-<script src="js/main.js"></script>
+  <div id="main">
+    <h2>Manage List Items</h2>
+    <!-- the root div mapped to $view in riot js -->
+    <div class="list-items"></div>
+  </div>
+
+  <!-- Templates -->
+  <div id="templates">
+
+    <script class="list-item" type="text/template">
+      <li class="list-item">
+         <div class="view">
+            <label class="li-name">{{name}}</label>
+            <label>( Category: <span class="li-category">{{category}}</span> )</label>
+            <input type="button" class="destroy" value="Destroy"/>
+            <input type="button" class="edit" value="Edit"/>
+         </div>
+         <div class="edit-item">
+           Edit Name: <input type="text" class="edit-name" value="{{name}}">
+           Edit Category: <input type="text" class="edit-category" value="{{category}}">
+           <input type="button" class="save-edit" value="Save Edits"/>
+         </div>
+      </li>
+    </script>
+  </div>
+
+  <!-- 3rd party scripts -->
+  <script src="vendor/js/jquery-1.10.2.min.js"></script>
+  <script src="vendor/js/robin.js"></script>
+  <!-- Models -->
+  <script src="js/models/list-item.js"></script>
+  <!-- Views -->
+  <script src="js/presenters/list-item-form.js"></script>
+  <script src="js/presenters/list-item-list.js"></script>
 
 </body>
 </html>

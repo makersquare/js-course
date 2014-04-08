@@ -1,0 +1,90 @@
+* {box-sizing: border-box;}
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  /*box-sizing: border-box;*/
+}
+
+h2 { text-align: center; }
+
+.error {
+  border: 1px solid #e23232;
+  font-weight: normal;
+  color: #590d0d;
+  background: #f3e2e2;
+  padding: 5px 10px;
+}
+
+#main .list-items-index-view {
+  border-left: 1px solid #000;
+}
+
+#main .half {
+  width: 50%;
+  float: left;
+}
+
+#main .list-items-index-view .destroy, #main .list-items-index-view .li-id {
+  display: none;
+}
+
+form.new-list-item {
+  border: 1px solid #000;
+  padding: 10px;
+  background: #B6C1DD;
+}
+form.new-list-item input[type="text"] {
+  width: 400px;
+}
+
+/* Normal list item state */
+.list-item {
+  background: #ccc;
+  /*height: 50px;*/
+  padding: 20px;
+  margin: 5px 0;
+}
+.list-item .edit-item { display: none; }
+.list-item .destroy {
+  background: rgb(221, 175, 175);
+  float: right;
+}
+.list-item .edit {
+  background: #81AA81;
+  float: right;
+}
+
+/* List item editing state */
+.list-item.edit {
+  background: rgb(241, 241, 176);
+}
+.list-item.edit .edit-item { display: block; }
+
+
+.li-name {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+input[type="text"] {
+  border: 1px solid #000000;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+input[type="button"], input[type="submit"] {
+  border: none;
+  width: 200px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.save-edit, .submit {
+  background: rgb(129, 170, 129);
+}
+
+.edit-item-section {
+  margin: 5px 0 0 0;
+}
