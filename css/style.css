@@ -1,0 +1,19 @@
+
+.metronome div {
+  background: #ccc;
+  float: left;
+  width: 25px; height: 25px;
+  margin: 0 2px;
+}
+
+.metronome div.active {
+  background: #0f0;
+}
+
+.snape, .dumbledore {
+  clear: both;
+  margin-top: 60px;
+  font-size: 2em;
+}
+
+.dumbledore { font-size: 4em; }
