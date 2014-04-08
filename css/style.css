@@ -1,0 +1,97 @@
+* {box-sizing: border-box;}
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  /*box-sizing: border-box;*/
+}
+img {
+  width: 150px;
+  cursor: pointer;
+}
+
+#puppy-showcase {
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+}
+
+.error {
+  border: 1px solid red;
+  font-weight: normal;
+  color: red;
+  background: rgb(221, 175, 175);
+  padding: 0 10px;
+}
+
+#puppy-index-view {
+  border-left: 1px solid #000;
+}
+
+.puppy, #puppy-index-view {
+  /*width: 50%;*/
+  float: left;
+}
+
+.puppy {
+  height: 200px;
+}
+
+#puppy-index-view .destroy {
+  display: none;
+}
+
+form.new-puppy {
+  border: 1px solid #000;
+  padding: 10px;
+  background: #B6C1DD;
+  clear: left;
+  height: 100px;
+}
+form.new-puppy input[type="text"] {
+  width: 400px;
+}
+
+.comment {
+  background: #ccc;
+  /*height: 50px;*/
+  padding: 20px;
+  margin: 5px 0;
+}
+.puppy:hover {
+  background: rgb(241, 241, 176);
+}
+
+
+.li-name {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+input[type="text"] {
+  border: 1px solid #000000;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+input[type="button"], input[type="submit"] {
+  border: none;
+  width: 200px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.save-edit, .submit {
+  background: rgb(129, 170, 129);
+}
+.destroy {
+  background: rgb(221, 175, 175);
+  float: right;
+}
+
+.edit-item-section {
+  margin: 5px 0 0 0;
+}
