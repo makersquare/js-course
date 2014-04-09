@@ -200,7 +200,7 @@ describe("Events", function() {
 
   })
 
-  it("Calling trigger should call all the functions an event", function(){
+  it("Calling trigger should call all the functions of an event", function(){
 
     var bark = false;
     var bark2 = false;
@@ -222,7 +222,7 @@ describe("Events", function() {
 
   })
 
-  it("Calling trigger should call only the functions an event", function(){
+  it("Calling trigger should call only the functions of an event", function(){
 
     var bark = false;
     var bark2 = false;
