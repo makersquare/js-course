@@ -3,12 +3,16 @@ describe("myQuery", function () {
   beforeEach(function () {
     // `setFixtures` comes from the jasmine-jquery plugin.
     // Although *you* are not using jQuery, we use this plugin to
-    // help us create HTML elements for testing
+    // help us create HTML elements for testing.
+    //
+    // Key point: The HTML elements we create here are available
+    // for our tests to select. They also get destroyed after each test.
     setFixtures(
       '<div id="profile" class="noice">' +
         '<div class="button first"></div>' +
-        '<div class="avatar"></div>' +
-        '<div class="button second"></div>' +
+        '<img class="avatar" />' +
+        '<a class="button second"></a>' +
+        '<a class="straggler"><label>Click meh</label></a>' +
       '</div>'
     );
   });
@@ -43,6 +47,17 @@ describe("myQuery", function () {
       var buttons = $('.button');
       expect(buttons.get(0).className).toMatch(/first/);
       expect(buttons.get(1).className).toMatch(/second/);
+    });
+
+    xit("selects elements by tag name", function() {
+      var anchors = $('a');
+      expect(anchors.length).toEqual(2)
+      expect(anchors.get(0).className).toEqual("button second");
+      expect(anchors.get(1).className).toEqual("straggler");
+
+      var images = $('img');
+      expect(images.length).toEqual(1)
+      expect(images.get(0).className).toEqual("avatar");
     });
   });
 
