@@ -18,7 +18,7 @@ describe("myQuery", function () {
   });
 
   describe("General each function", function () {
-    xit("iterates through an array", function () {
+    it("iterates through an array", function () {
       var testResult = [];
       var someArray = [10, 20, 30];
       $.each(someArray, function (number) {
@@ -34,7 +34,7 @@ describe("myQuery", function () {
 
   describe("Selectors", function () {
 
-    xit("selects an element by id", function() {
+    it("selects an element by id", function() {
       var elem = $('#profile').get(0);
       expect(elem.className).toEqual('noice');
     });
