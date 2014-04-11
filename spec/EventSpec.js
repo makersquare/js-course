@@ -104,12 +104,6 @@ describe("Events", function() {
 
   });
 
-  it("Should have a property called 'trigger' which is a Function", function() {
-
-    expect(dog.trigger instanceof Function).toBe(true);
-
-  });
-
   it("Should add a property to the internal events object when on is called", function() {
 
     console.log(Events);
@@ -117,7 +111,7 @@ describe("Events", function() {
       console.log("woof");
     });
 
-    expect(dog.events.bark).toBeDefined
+    expect(dog.events.bark).toBe(true)
 
   });
 
@@ -128,7 +122,7 @@ describe("Events", function() {
       console.log("woof");
     });
 
-    expect(dog.events.bark instanceof Array ).toBeDefined();
+    expect(dog.events.bark instanceof Array ).toBe(true);
 
   });
 
@@ -182,6 +176,12 @@ describe("Events", function() {
 
     expect(dog.events.bark.length).toBe(1);
     expect(dog.events.scratch.length).toBe(1);
+
+  });
+
+  it("Should have a property called 'trigger' which is a Function", function() {
+
+    expect(dog.trigger instanceof Function).toBe(true);
 
   });
 
