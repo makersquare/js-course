@@ -77,13 +77,13 @@ describe("Events", function() {
   });
 
 
-  it("Should be not be an Array", function() {
+  it("Should not be an Array", function() {
 
     expect(Events instanceof Array).toBe(false);
 
   });
 
-  it("Should have an not have an internal events object until on is called", function() {
+  it("Should not have an internal events object until on is called", function() {
 
     expect(Events.events).toBeUndefined();
 
