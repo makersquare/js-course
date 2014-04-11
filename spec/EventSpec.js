@@ -132,7 +132,7 @@ describe("Events", function() {
 
   });
 
-  it("The length of the array should be 1 when on is called once", function() {
+  it("The length of the array should be 1 when 'on' is called once", function() {
 
     dog.on("bark", function(){
       console.log("woof");
