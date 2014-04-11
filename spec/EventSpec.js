@@ -77,13 +77,13 @@ describe("Events", function() {
   });
 
 
-  it("Should be not be an Array", function() {
+  it("Should not be an Array", function() {
 
     expect(Events instanceof Array).toBe(false);
 
   });
 
-  it("Should have an not have an internal events object until on is called", function() {
+  it("Should not have an internal events object until on is called", function() {
 
     expect(Events.events).toBeUndefined();
 
@@ -126,7 +126,7 @@ describe("Events", function() {
 
   });
 
-  it("The length of the array should be 1 when on is called once", function() {
+  it("The length of the array should be 1 when 'on' is called once", function() {
 
     dog.on("bark", function(){
       console.log("woof");
@@ -200,7 +200,7 @@ describe("Events", function() {
 
   })
 
-  it("Calling trigger should call all the functions an event", function(){
+  it("Calling trigger should call all the functions of an event", function(){
 
     var bark = false;
     var bark2 = false;
@@ -222,7 +222,7 @@ describe("Events", function() {
 
   })
 
-  it("Calling trigger should call only the functions an event", function(){
+  it("Calling trigger should call only the functions of an event", function(){
 
     var bark = false;
     var bark2 = false;
