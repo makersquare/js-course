@@ -111,7 +111,7 @@ describe("Events", function() {
       console.log("woof");
     });
 
-    expect(dog.events.bark).toBe(true)
+    expect(dog.events.bark).toBeDefined();
 
   });
 
@@ -173,7 +173,7 @@ describe("Events", function() {
     dog.on("scratch", function(){
       console.log("The fleas begin to stir.")
     })
-
+    
     expect(dog.events.bark.length).toBe(1);
     expect(dog.events.scratch.length).toBe(1);
 
