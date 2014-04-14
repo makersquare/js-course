@@ -9,3 +9,8 @@ var extend = function(destination,source) {
   return destination;
 };
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 86109715cf79f09114f0713e8d98e2d02ce5e238

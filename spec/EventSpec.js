@@ -131,6 +131,7 @@ describe("Events", function() {
              // read the rest of the test
              // and see that the events property should be an array
              // .bark is = to ['bark'] . is string
+
     expect(dog.events.bark).toBeDefined();
 
   });
