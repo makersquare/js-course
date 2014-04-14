@@ -111,8 +111,8 @@ describe("Events", function() {
       console.log("woof");
     });
 
-    expect(dog.events.bark).toBeDefined()
 
+    expect(dog.events.bark).toBeDefined();
   });
 
 
