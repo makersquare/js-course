@@ -39,22 +39,22 @@ describe("Extend Function", function() {
 
   it("Should not add any additional properties to the source or destination", function() {
 
-    var returnValue = extend(destination, source);
+    var returnValue = extend(destination, source); // calls extend
 
-    expect(source).not.toBe(destination);
+    expect(source).not.toBe(destination); // test if different objects
 
-    var sourceProps = [];
-    var destProps = [];
+    var sourceProps = []; // empty array
+    var destProps = []; // empty array
 
     for (var prop in source){
-      sourceProps.push(prop);
+      sourceProps.push(prop); // push propertes into array
     }
 
     for (var prop in destination){
-      destProps.push(prop);
+      destProps.push(prop); // push properties into array
     }
 
-    expect(destProps.length).toBe(2);
+    expect(destProps.length).toBe(2); // length to be 2
     expect(sourceProps.length).toBe(2);
 
   });
@@ -66,9 +66,9 @@ describe("Events", function() {
 
   beforeEach(function() {
 
-    dog = extend({}, Events);
-
-  });
+    dog = extend({}, Events); // calling extend on dog,
+                              // all properties of Events into empty object
+  });                         // dog will now have props from Event
 
   it("Should have an object called Events", function() {
 
@@ -83,15 +83,18 @@ describe("Events", function() {
 
   });
 
-  it("Should not have an internal events object until on is called", function() {
-
+  it("Should not have an internal events object until 'on' is called", function() {
+             // on returns the function
     expect(Events.events).toBeUndefined();
-
+    // bascially, Events should not have an object events, until
+    // you run the on function, or when you call on
+    // you will have events object, unless it is already created
   });
 
 
   it("Should be extendable", function() {
-
+     // dog should be an object, because extend returns an object
+     // dog should have an on function, dog is an object
     expect(dog instanceof Object).toBe(true);
     expect(dog.on instanceof Function).toBe(true);
     expect(dog.trigger instanceof Function).toBe(true);
@@ -100,18 +103,36 @@ describe("Events", function() {
 
   it("Should have a property called 'on' which is a Function", function() {
 
+
     expect(dog.on instanceof Function).toBe(true);
 
   });
 
   it("Should add a property to the internal events object when on is called", function() {
-
+    // should add a property to the internval events
+    // add property to internal events object
+    // so before you cann events to inernal events object
+    // you need to make one!, on should
+    // look at code below
+    // on is called. then it creates an events prop name
+    // from the test you can deduce that is an object
+    // because bark is called on it
+    //
     console.log(Events);
-    dog.on("bark", function(){
-      console.log("woof");
-    });
+    dog.on("bark", function(){ // on is a function takes two parameters
+      console.log("woof");     // events and a function
+    });                        // console logs in block
+             // where did events come from?
+             // you can deduce that once you call on
+             // dog now has events object
+             // make on, create an events object, if the
+             // object does not already have one
+             // then add the event, or bark to the event object
+             // read the rest of the test
+             // and see that the events property should be an array
+             // .bark is = to ['bark'] . is string
 
-    expect(dog.events.bark).toBeDefined()
+    expect(dog.events.bark).toBeDefined();
 
   });
 
@@ -190,7 +211,7 @@ describe("Events", function() {
     var bark = false;
 
     dog.on("bark", function(){
-      bark = true;
+      bark = true;   // this is done for you in the test
       console.log("woof");
     });
 
