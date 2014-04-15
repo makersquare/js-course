@@ -1,6 +1,6 @@
-var template = "<p>{{text}}</p>"
-var data = {text: "something"}
-template.replace("{{text}}", data["text"])
+// var template = "<p>{{text}}</p>"
+// var data = {text: "something"}
+// template.replace("{{text}}", data["text"])
 
 var render = function(template, data){
   var rendered_template = template;
