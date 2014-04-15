@@ -16,7 +16,11 @@ describe("Render Function for Templates", function() {
     person2 = {
       firstName: "Osei",
       lastName: "It's complicated"
-    }
+    };
+
+    person3 = {
+      firstName: "Ifu"
+    };
 
   });
 
@@ -44,6 +48,8 @@ describe("Render Function for Templates", function() {
     expect(result).toBe("<div class='firstName'>Gilbert JS</div>");
     var result2 = render(template3, person2);
     expect(result2).toBe("<div class='firstName'>Osei It's complicated</div>");
+    var result3 = render(template3, person3);
+    expect(result3).toBe("<div class='firstName'>Ifu Error</div>");
   });
 
 });
