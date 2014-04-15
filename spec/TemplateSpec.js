@@ -3,11 +3,11 @@ describe("Render Function for Templates", function() {
   var template, template2, person, person2;
 
   beforeEach(function() {
-
+    // three templates that are strings
     template = "<div class='firstName'>{{firstName}}</div>";
     template2 = "<div class='firstName'>{{firstName}}{{firstName}}</div>";
     template3 = "<div class='firstName'>{{firstName}} {{lastName}}</div>";
-
+   // two objects with properties firstname and lastname
     person = {
       firstName: "Gilbert",
       lastName: "JS"
@@ -17,18 +17,21 @@ describe("Render Function for Templates", function() {
       firstName: "Osei",
       lastName: "It's complicated"
     }
-
+        // pass in firstname from object to template markup with {{}}
   });
 
   it("Should be a function", function() {
     expect(render instanceof Function).toBe(true);
-  });
+  }); // render should be a function
 
   it("Should return a string", function() {
     var result = render(template, person);
     expect(typeof result ).toBe("string");
   });
-
+             // okay, you know you need to loop through object, replace markup with
+             // object property
+             // need a conditinal so when you see the markup {{}}, replace it with
+             // the object
   it("Should interpolate values of template with object properties of the same name", function() {
     var result = render(template, person);
     expect(result).toBe("<div class='firstName'>Gilbert</div>");
