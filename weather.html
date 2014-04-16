@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+  <title>Austin Weather</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+
+  <!-- Just for debugging purposes. Don't actually copy this line! -->
+  <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="jumbotron">
+    <h1>Austin Weather</h1>
+    <canvas id="icon1" width="128" height="128"></canvas>
+
+    <div class="weather-forecast">
+      <div class="day">
+        <h3>Today</h3>
+        <dl class="day dl-horizontal" id= "newtemp">
+          <dt>Humidity:</dt>
+          <dd id ="humidity"></dd>
+          <dt>Pressure:</dt>
+          <dd id="pressure"></dd>
+          <dt>Temperature:</dt>
+          <dd id="temperature"></dd>
+          <dt>High:</dt>
+          <dd id="high"></dd>
+          <dt>Low:</dt>
+          <dd id="low"></dd>
+        </dl>
+      </div>
+    </div>
+
+    <p id="get-weather"><a class="btn btn-lg btn-success" href="#" role="button">Get Weather</a></p>
+  </div>
+
+  <div class="footer">
+    <p>&copy; The Maker Square 2013</p>
+  </div>
+
+</div> <!-- /container -->
+
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://learn.themakersquare.com/materials/vendor/jquery.riot.js"></script>
+<script src="http://learn.themakersquare.com/materials/week-7/weather-icons.js"></script>
+<script src= "robin.js"></script>
+<script type = "text/javascript">
+
+  var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=Austin&mode=json&units=imperial";
+
+  var template = '<dl class="day dl-horizontal"><dt>Humidity:</dt><dd id ="humidity">{{humidity}}</dd><dt>Pressure:</dt><dd id="pressure">{{pressure}}</dd><dt>Temperature:</dt><dd id="temperature">{{temp}}</dd><dt>High:</dt><dd id="high">{{temp_max}}</dd><dt>Low:</dt><dd id="low">{{temp_min}}</dd></dl></div></div>'
+
+
+  var skycons = new Skycons({"color": "black"});
+  var weather = " ";
+  $("#get-weather").on('click', function (e) {
+    e.preventDefault();
+    console.log('Fetching weather...');
+    $.get(weatherUrl, function (data){
+
+      $("#newtemp").html(Robin.render(template, data.main))
+      weather = data.weather[0].description
+
+      if(weather.indexOf('cloud') !== -1){
+        weather = Skycons.CLOUDY
+      } else if (weather.indexOf('clear') !== -1){
+        weather = Skycons.CLEAR_DAY
+      } else if (weather.indexOf('fog') !== -1){
+        weather = Skycons.FOG
+      } else if (weather.indexOf('clear night') !== -1){
+        weather = Skycons.CLEAR_NIGHT
+      } else if (weather.indexOf('cloudy day') !== -1){
+        weather = Skycons.PARTLY_CLOUDY_DAY
+      } else if (weather.indexOf('cloudy night') !==-1){
+        weather = Skycons.PARTLY_CLOUDY_NIGHT
+      } else if (weather.indexOf('rain') !== -1){
+        weather = Skycons.RAIN
+      } else if (weather.indexOf('sleet') !== -1){
+        weather = Skycons.SLEET
+      } else if (weather.indexOf('snow') !== -1){
+        weather = Skycons.SNOW
+      } else if (weather.indexOf('wind') !== -1){
+        weather = Skycons.WIND
+      }
+
+      skycons.add("icon1", weather)
+
+    });
+    console.log(weather)
+
+
+  });
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
