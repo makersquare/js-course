@@ -48,7 +48,13 @@
       </div>
     </div>
 
+  <div id="day2"></div>
+  <div id="day3"></div>
+  <div id="day4"></div>
+
+
     <p id="get-weather"><a class="btn btn-lg btn-success" href="#" role="button">Get Weather</a></p>
+    <p id="get-forecast"><a class="btn btn-lg btn-success" href="#" role="button">Get 3 Day Forecast</a></p>
   </div>
 
   <div class="footer">
@@ -59,7 +65,45 @@
 
 <script type="text/template" id="wtemp">
   <div class="day">
-    <h3>Today</h3>
+    <h3>Tomorrow</h3>
+    <dl class="day dl-horizontal">
+      <dt>Humidity:</dt>
+      <dd id="humidity">{{humidity}}</dd>
+      <dt>Pressure:</dt>
+      <dd id="pressure">{{pressure}}</dd>
+      <dt>Temperature:</dt>
+      <dd id="temperature">{{temp}}</dd>
+      <dt>High:</dt>
+      <dd id="high">{{temp_max}}</dd>
+      <dt>Low:</dt>
+      <dd id="low">{{temp_min}}</dd>
+    </dl>
+  </div>
+
+</script>
+
+<script type="text/template" id="temp2">
+  <div class="day">
+    <h3>Day2</h3>
+    <dl class="day dl-horizontal">
+      <dt>Humidity:</dt>
+      <dd id="humidity">{{humidity}}</dd>
+      <dt>Pressure:</dt>
+      <dd id="pressure">{{pressure}}</dd>
+      <dt>Temperature:</dt>
+      <dd id="temperature">{{temp}}</dd>
+      <dt>High:</dt>
+      <dd id="high">{{temp_max}}</dd>
+      <dt>Low:</dt>
+      <dd id="low">{{temp_min}}</dd>
+    </dl>
+  </div>
+
+</script>
+
+<script type="text/template" id="temp3">
+  <div class="day">
+    <h3>Day3</h3>
     <dl class="day dl-horizontal">
       <dt>Humidity:</dt>
       <dd id="humidity">{{humidity}}</dd>
@@ -85,8 +129,12 @@
 
  var skycons = new Skycons({"color": "black"});
 var template = $("#wtemp").html();
+var template2 = $("#temp2").html();
+var template3 = $("#temp3").html();
+
 
   var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=Austin&mode=json&units=imperial";
+  var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Austin&mode=json&units=imperial&cnt=3"
 
   // var render = function(template,object){
   
@@ -96,7 +144,29 @@ var template = $("#wtemp").html();
   //   return template;
   // };
 
-    var weather = "";
+  var weather = "";
+
+  var formatData = function(obj){
+    return {
+      humidity: obj.humidity,
+      pressure: obj.pressure,
+      temp_max: obj.temp.max,
+      temp_min: obj.temp.min,
+      temp:     obj.temp.day
+    }
+  }
+
+  $("#get-forecast").on('click', function (e) {
+    e.preventDefault();
+
+    $.get(forecastUrl,function(data) {
+      $("#day2").html(Robin.render(template,formatData(data.list[0])))
+      $("#day3").html(Robin.render(template2,formatData(data.list[1])))
+      $("#day4").html(Robin.render(template3,formatData(data.list[2])))
+      
+      });
+    });
+
   $("#get-weather").on('click', function (e) {
     e.preventDefault();
     console.log('Fetching weather...');
@@ -109,8 +179,10 @@ var template = $("#wtemp").html();
       
       if (data.weather[0].description.indexOf('cloud') !== -1 ) {
         weather = Skycons.CLOUDY
+        $('body').css('background-color','gray')
        } else if (data.weather[0].description.indexOf('clear') !== -1) {
         weather = Skycons.CLEAR_DAY
+        $('body').css('background-color','blue')
        } else if (data.weather[0].description.indexOf('rain') !== -1) {
         weather = Skycons.RAIN
        } else if (data.weather[0].description.indexOf('snow') !==-1) {
@@ -131,7 +203,6 @@ var template = $("#wtemp").html();
 
 
       skycons.add("icon1", weather)
-
     });
 
    
