@@ -5,12 +5,12 @@
     totalTickCount: 0,
     tick: function () {
       this.totalTickCount += 1;
-      clock.trigger('tick', this.totalTickCount);
+      clock.trigger('tick');
     }
   };
 
   // Make the clock observable
-  Robin.extend(clock, Robin.events);
+  Robin.extend(clock, Robin.Events);
 
   // When we start the clock, make it tick 108 beats per minute
   clock.start = function () {

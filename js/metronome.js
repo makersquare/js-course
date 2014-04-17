@@ -1,9 +1,9 @@
 (function () {
 
   // On clock tick, update the metronome visually
-  clock.on('tick', function (tickCount) {
+  clock.on('tick', function () {
     // step is a number between 0 and 3
-    var step = (tickCount - 1) % 4;
+    var step = (clock.totalTickCount - 1) % 4;
 
     // Activate the correct box by:
     // 1. Removing the 'active' class from ALL metronome divs
