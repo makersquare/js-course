@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+  <title>Austin Weather</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+
+  <!-- Just for debugging purposes. Don't actually copy this line! -->
+  <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="jumbotron">
+    <h1>Austin Weather</h1>
+    <canvas id="icon1" width="128" height="128"></canvas>
+
+    <div class="weather-forecast" id="here">
+      <div class="day">
+        <h3>Today</h3>
+        <dl class="day dl-horizontal">
+          <dt>Humidity:</dt>
+          <dd id="humidity"></dd>
+          <dt>Pressure:</dt>
+          <dd id="pressure"></dd>
+          <dt>Temperature:</dt>
+          <dd id="temperature"></dd>
+          <dt>High:</dt>
+          <dd id="high"></dd>
+          <dt>Low:</dt>
+          <dd id="low"></dd>
+        </dl>
+      </div>
+    </div>
+
+  <div id="day2"></div>
+  <div id="day3"></div>
+  <div id="day4"></div>
+
+
+    <p id="get-weather"><a class="btn btn-lg btn-success" href="#" role="button">Get Weather</a></p>
+    <p id="get-forecast"><a class="btn btn-lg btn-success" href="#" role="button">Get 3 Day Forecast</a></p>
+  </div>
+
+  <div class="footer">
+    <p>&copy; The Maker Square 2013</p>
+  </div>
+
+</div> <!-- /container -->
+
+<script type="text/template" id="wtemp">
+  <div class="day">
+    <h3>Tomorrow</h3>
+    <dl class="day dl-horizontal">
+      <dt>Humidity:</dt>
+      <dd id="humidity">{{humidity}}</dd>
+      <dt>Pressure:</dt>
+      <dd id="pressure">{{pressure}}</dd>
+      <dt>Temperature:</dt>
+      <dd id="temperature">{{temp}}</dd>
+      <dt>High:</dt>
+      <dd id="high">{{temp_max}}</dd>
+      <dt>Low:</dt>
+      <dd id="low">{{temp_min}}</dd>
+    </dl>
+  </div>
+
+</script>
+
+<script type="text/template" id="temp2">
+  <div class="day">
+    <h3>Day2</h3>
+    <dl class="day dl-horizontal">
+      <dt>Humidity:</dt>
+      <dd id="humidity">{{humidity}}</dd>
+      <dt>Pressure:</dt>
+      <dd id="pressure">{{pressure}}</dd>
+      <dt>Temperature:</dt>
+      <dd id="temperature">{{temp}}</dd>
+      <dt>High:</dt>
+      <dd id="high">{{temp_max}}</dd>
+      <dt>Low:</dt>
+      <dd id="low">{{temp_min}}</dd>
+    </dl>
+  </div>
+
+</script>
+
+<script type="text/template" id="temp3">
+  <div class="day">
+    <h3>Day3</h3>
+    <dl class="day dl-horizontal">
+      <dt>Humidity:</dt>
+      <dd id="humidity">{{humidity}}</dd>
+      <dt>Pressure:</dt>
+      <dd id="pressure">{{pressure}}</dd>
+      <dt>Temperature:</dt>
+      <dd id="temperature">{{temp}}</dd>
+      <dt>High:</dt>
+      <dd id="high">{{temp_max}}</dd>
+      <dt>Low:</dt>
+      <dd id="low">{{temp_min}}</dd>
+    </dl>
+  </div>
+
+</script>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://learn.themakersquare.com/materials/vendor/jquery.riot.js"></script>
+<script src="http://learn.themakersquare.com/materials/week-7/weather-icons.js"></script>
+<script src="robin.js"> </script>
+<script type="text/javascript">
+
+ var skycons = new Skycons({"color": "black"});
+var template = $("#wtemp").html();
+var template2 = $("#temp2").html();
+var template3 = $("#temp3").html();
+
+
+  var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=Austin&mode=json&units=imperial";
+  var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Austin&mode=json&units=imperial&cnt=3"
+
+  // var render = function(template,object){
+  
+  //   for(var prop in object) {
+  //     template = template.replace( new RegExp ( "{{" + prop + "}}",'g'),object[prop])
+  //   }
+  //   return template;
+  // };
+
+  var weather = "";
+
+  var formatData = function(obj){
+    return {
+      humidity: obj.humidity,
+      pressure: obj.pressure,
+      temp_max: obj.temp.max,
+      temp_min: obj.temp.min,
+      temp:     obj.temp.day
+    }
+  }
+
+  $("#get-forecast").on('click', function (e) {
+    e.preventDefault();
+
+    $.get(forecastUrl,function(data) {
+      $("#day2").html(Robin.render(template,formatData(data.list[0])))
+      $("#day3").html(Robin.render(template2,formatData(data.list[1])))
+      $("#day4").html(Robin.render(template3,formatData(data.list[2])))
+      
+      });
+    });
+
+  $("#get-weather").on('click', function (e) {
+    e.preventDefault();
+    console.log('Fetching weather...');
+
+    // TODO: Complete exercise #1 here
+    $.get(weatherUrl,function(data) {
+
+     
+      $("#here").html(Robin.render(template,data.main))
+      
+      if (data.weather[0].description.indexOf('cloud') !== -1 ) {
+        weather = Skycons.CLOUDY
+        $('body').css('background-color','gray')
+       } else if (data.weather[0].description.indexOf('clear') !== -1) {
+        weather = Skycons.CLEAR_DAY
+        $('body').css('background-color','blue')
+       } else if (data.weather[0].description.indexOf('rain') !== -1) {
+        weather = Skycons.RAIN
+       } else if (data.weather[0].description.indexOf('snow') !==-1) {
+        weather = Skycons.SNOW
+       } else if (data.weather[0].description.indexOf('fog') !== -1) {
+        weather = Skycons.FOG
+       } else if (data.weather[0].description.indexOf('sleet') !== -1) {
+        weather = Skycons.SLEET
+       } else if ( ( data.weather[0].description.indexOf('partly') !== -1 ) && ( data.weather[0].description.indexOf('night') ) ) {
+        weather = Skycons.PARTLY_CLOUDY_NIGHT
+       } else if ((data.weather[0].description.indexOf('partly') !== -1) && (data.weather[0].description.indexOf('day'))) {
+        weather = Skycons.PARTLY_CLOUDY_DAY
+       } else if ((data.weather[0].description.indexOf('clear') !== -1) && (data.weather[0].description.indexOf('day'))) {
+        weather = Skycons.CLEAR_DAY
+       } else {
+        weather = Skycons.CLEAR_NIGHT
+       }
+
+
+      skycons.add("icon1", weather)
+    });
+
+   
+    console.log(weather)
+
+    // TODO: Complete exercise #2 here
+      
+  });
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
