@@ -26,12 +26,21 @@
 </div>
 
 <div id="templates">
-  <!-- TEMPLATES -->
+  <!-- TEMPLATE HERE  even though it's a script tag it's not javaScript, give class so can access via jQuery-->
+  <script class="item" type="text/template">
+    <div class="item">
+      <p>{{name}} - ${{price}}</p>
+    </div>
+  </script>
+
 </div>
+
 
 <script src="vendor/js/jquery-1.10.2.min.js"></script>
 <script src="vendor/js/robin.js"></script>
 <script src="js/main.js"></script>
+
+
 
 </body>
 </html>
