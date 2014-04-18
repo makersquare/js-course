@@ -10,11 +10,18 @@
 
 <form id="new-video">
   <!-- TODO: 2 inputs, 1 button -->
+  <label>Title: </label>
+  <input type="text" id="video-title">
+  <label>Youtube Id: </label>
+  <input type="text" id="youtube-id">
+  <button type="submit">Submit</button>
 </form>
-
 
 <div id="templates">
   <!-- TODO: video-list-item template -->
+  <script type="text/template" class="video-list-item">
+  	<a href="https://www.youtube.com/watch?v={{youtubeId}}"><h3>{{title}}</h3></a>
+  </script>
 </div>
 
 <script src="vendor/js/jquery-1.10.2.min.js"></script>
