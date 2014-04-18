@@ -1,7 +1,7 @@
 (function () {
 
-  clock.on('tick', function (tickCount) {
-    console.log('tick!', tickCount);
+  clock.on('tick', function () {
+    console.log('tick!', clock.totalTickCount);
   });
 
   $('#clock-control .start').on('click', function (e) {
