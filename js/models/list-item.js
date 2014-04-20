@@ -1,14 +1,16 @@
 (function () {
 
   var ListItem = function () {
-    // The "private" data
-    var items = [];
+    // This is where we store the list items
+    this.items = [];
 
     // Add the .on and .trigger methods to the new object being created
     Robin.extend(this, Robin.Events);
 
     this.create = function (listItem) {
       // TODO
+      // add the new listItem to the items array
+      // trigger 'create'
     };
 
     this.destroy = function (index) {
@@ -17,7 +19,6 @@
 
     this.update = function (index, name, priority) {
       // TODO EXTENSION
-      this.trigger('update', items[index], index);
     };
 
   };
