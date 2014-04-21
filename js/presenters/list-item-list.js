@@ -38,9 +38,9 @@
 
   // When we hear the 'create' event, that means a new list item was just
   // created. In this app, list items are created in list-item-form.js
-  listItems.on('create', function () {
-    // Because we know the last element in the array is what we've added, rendering is easy!
-    var newListItemHtml = Robin.render(itemTemplate, listItems.items[listItems.items.length - 1]);
+  listItems.on('create', function (item) {
+    // Because we're given the item object as event data, rendering is easy!
+    var newListItemHtml = Robin.render(itemTemplate, item);
     $view.append(newListItemHtml);
   });
 
