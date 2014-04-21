@@ -7,6 +7,7 @@
 
 <div id="video-display"></div>
 <div id="video-list"></div>
+<div id="genre-stats"></div>
 
 <form id="new-video">
   <!-- TODO: 2 inputs, 1 button -->
@@ -14,13 +15,24 @@
   <input type="text" id="video-title">
   <label>Youtube Id: </label>
   <input type="text" id="youtube-id">
+  <label>Genre: </label>
+  <input type="text" id="video-genre">
   <button type="submit">Submit</button>
 </form>
 
 <div id="templates">
-  <!-- TODO: video-list-item template -->
-  <script type="text/template" class="video-list-item">
-  	<a href="https://www.youtube.com/watch?v={{youtubeId}}"><h3>{{title}}</h3></a>
+  <!-- Templates -->
+  <!--
+  <script type="text/template" class="video-list-item" data-youtube-id="{{youtubeId}}">
+    <a href="https://www.youtube.com/watch?v={{youtubeId}}"><h3>{{title}}</h3></a>
+  </script> -->
+
+  <script type="text/template" class="genre-stats-item">
+    <p>The {{genre}} genre has {{statsCount}} video(s).</p>
+  </script>
+
+  <script type="text/template" class="video-embed">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{youtubeId}}/" frameborder="0" allowfullscreen></iframe>
   </script>
 </div>
 
