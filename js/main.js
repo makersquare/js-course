@@ -3,7 +3,7 @@ var genreTemplate = $('#templates .genre-stats-item').html();
 var embedTemplate = $('#templates .video-embed').html();
 
 var videos = [
-  { title: 'Get Krazy', youtubeId: 'GyR2HJ9B7aM', genre: 'kid rap' },
+  { title: 'GoPro: Masters of Indo', youtubeId: '_UUjJJQ02n0', genre: 'surfing' },
   { title: 'Sadness', youtubeId: 'sIeJSSjTG3k', genre: 'piano' }
 ];
 
@@ -34,8 +34,8 @@ var renderGenreStats = function() {
 var renderVideoList = function () {
   for (var video in videos) {
     // newItem = Robin.render(videoTemplate, videos[video])
-    newVideo = Robin.render(embedTemplate, videos[video])
     // $('#video-list').append(newItem);
+    newVideo = Robin.render(embedTemplate, videos[video])
     $('#video-display').append(newVideo);
   }
 };
