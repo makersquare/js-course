@@ -1,11 +1,11 @@
 var Events = {
-  on: function(event, func) {
+  on: function(eve, func) {
     this.events = this.events || {};
-    this.events[event] = this.events[event] || [];
-    this.events[event].push(func)
+    this.events[eve] = this.events[eve] || [];
+    this.events[eve].push(func)
   },
-  trigger: function(event){
-    var events = this.events[event];
+  trigger: function(eve){
+    var events = this.events[eve];
     for (var i in events) {
       events[i]();
     }
