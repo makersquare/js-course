@@ -6,7 +6,7 @@ var Events = {
   },
   trigger: function(event){
     var events = this.events[event];
-    for (var i = 0; i < events.length; i++) {
+    for (var i in events) {
       events[i]();
     }
   },
