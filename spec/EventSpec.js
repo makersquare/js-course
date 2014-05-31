@@ -86,6 +86,8 @@ describe("Events", function() {
   it("Should not have an internal events object until on is called", function() {
 
     expect(Events.events).toBeUndefined();
+    Events.on('click', function(event) { console.log('poop'); });
+    expect(Events.events).toBeDefined();
 
   });
 
