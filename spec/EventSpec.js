@@ -62,8 +62,8 @@ describe("Extend Function", function() {
 });
 
 describe("Events", function() {
-  var dog;
 
+  var dog; 
   beforeEach(function() {
 
     dog = extend({}, Events);
@@ -84,34 +84,35 @@ describe("Events", function() {
   });
 
   it("Should not have an internal events object until on is called", function() {
-
-    expect(Events.events).toBeUndefined();
-    Events.on('click', function(event) { console.log('poop'); });
-    expect(Events.events).toBeDefined();
+    expect(dog.events).toBeUndefined();
+    dog.on('click', function() {});
+    expect(dog.events).toBeDefined();
 
   });
 
 
   it("Should be extendable", function() {
-
+    console.log(dog);
     expect(dog instanceof Object).toBe(true);
     expect(dog.on instanceof Function).toBe(true);
     expect(dog.trigger instanceof Function).toBe(true);
 
   });
 
-  it("Should have a property called 'on' which is a Function", function() {
+  // seems redundant to previous test ^
+  // it("Should have a property called 'on' which is a Function", function() {
 
-    expect(dog.on instanceof Function).toBe(true);
+  //   expect(dog.on instanceof Function).toBe(true);
 
-  });
+  // });
 
   it("Should add a property to the internal events object when on is called", function() {
 
-    console.log(Events);
+    console.log(Events, dog);
     dog.on("bark", function(){
       console.log("woof");
     });
+    console.log(Events, dog);
 
     expect(dog.events.bark).toBeDefined()
 
