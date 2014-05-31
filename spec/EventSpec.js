@@ -92,7 +92,6 @@ describe("Events", function() {
 
 
   it("Should be extendable", function() {
-    console.log(dog);
     expect(dog instanceof Object).toBe(true);
     expect(dog.on instanceof Function).toBe(true);
     expect(dog.trigger instanceof Function).toBe(true);
@@ -108,11 +107,9 @@ describe("Events", function() {
 
   it("Should add a property to the internal events object when on is called", function() {
 
-    console.log(Events, dog);
     dog.on("bark", function(){
       console.log("woof");
     });
-    console.log(Events, dog);
 
     expect(dog.events.bark).toBeDefined()
 
@@ -216,7 +213,6 @@ describe("Events", function() {
       bark2 = true;
       console.log("woof2");
     });
-
 
     dog.trigger("bark");
 
