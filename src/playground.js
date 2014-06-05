@@ -5,7 +5,7 @@ var updateBox = {
 		age: 50,
 		description: 'This is my description'
 	},
-	template : '<div class="box"><p>{{name}}</p><p>{{age}}</p><p>{{job}}</p></div>',
+	template : '<div class="box"><p>{{name}}</p><p>{{age}}</p><p>{{description}}</p></div>',
 	init : function() {
 		var me = this;
 		// Put block into the DOM
