@@ -13,8 +13,11 @@
       and then return an object from the module which has a property that references your new private function.
 
     LEVEL 3: Upon retrieving all of the callbacks to the server, sort them and construct the entire ordered string.
-      Pass this string from the module, and then in this script tag, append them to #container.
+      Pass this string from the module, and then in this script tag, append them to #container. NOTE: to make sure
+      that the string looks right, run a RegExp replace on the final string to replace "\n" with "<br />".
   */
 
-  endpointModule.run();
+  endpointModule.run(function(string) {
+    $('#container').html(string);
+  });
 </script>
