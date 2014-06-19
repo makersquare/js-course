@@ -1,7 +1,5 @@
 (function () {
-
   var QueryWrapper = function (elems) {
-    // this.lastDisplay = "";
 
     this.get = function(num) {
       if (elems.length === undefined) {
@@ -11,7 +9,7 @@
         return elems[num];
       }
       return this;
-    }
+    };
 
     this.length = elems.length;
 
@@ -22,8 +20,8 @@
 
     this.css = function(property, value) {
       if (typeof property == "string") {
-        func = function(i) {
-          i.style[property]=value;
+        func = function(item) {
+          item.style[property]=value;
         };
         myQuery.each(elems, func);
       }
@@ -67,8 +65,8 @@
   };
 
   var myQuery = function (selector) {
-    first = selector.charAt(0);
-    var elements = []
+    var first = selector.charAt(0);
+    var elements = [];
     switch(first) {
       case '#':
         elements = document.getElementById(selector.slice(1));
@@ -88,10 +86,15 @@
   window.$ = myQuery;
   myQuery.version = 'beta';
 
-  myQuery.each = function (someArray, f) {
+  myQuery.each = function (someArray, funct) {
     for (var i = 0; i < someArray.length; i++) {
-      f(someArray[i], i);
+      funct(someArray[i], i);
     };
     return someArray;
   };
+
+  // myQuery.each([1,3,5,6,8], function(item, iterator) {
+  //   console.log("this is the value at this part of Arr", item, "at index", iterator);
+  // })
+
 })();
