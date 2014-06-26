@@ -1,6 +1,7 @@
 # required gem includes
 require 'sinatra'
 require "sinatra/json"
+require "sinatra/reloader" if development?
 require 'pry-debugger'
 
 # require file includes
@@ -24,15 +25,16 @@ get '/api/jokes' do
 end
 
 post '/api/joke' do
-  joke_info = params[:joke]
+  puts params
+  joke_info = params["joke"]
   joke = Jokes.orm.add_joke(
-    joke_info[:question],
-    joke_info[:answer]
+    joke_info["question"],
+    joke_info["answer"]
     )
   json joke.to_json
 end
 
 delete '/api/joke/:id' do
   Jokes.orm.delete_joke(params[:id].to_i)
-  json "true"
+  json({ id: params[:id] })
 end

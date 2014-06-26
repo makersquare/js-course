@@ -8,11 +8,11 @@ module Jokes
     end
 
     def to_json
-      JSON.generate({
+      {
         id: id,
         question: question,
         answer: answer
-        })
+      }
     end
   end
 end
