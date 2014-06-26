@@ -9,7 +9,11 @@ require_relative 'jokes_app.rb'
 set :bind, '0.0.0.0' # Vagrant fix
 set :port, 9494
 Pry.config.input = STDIN
-  Pry.config.output = STDOUT
+Pry.config.output = STDOUT
+
+get '/' do
+  send_file 'index.html'
+end
 
 #-------- JSON API routes -----------
 
