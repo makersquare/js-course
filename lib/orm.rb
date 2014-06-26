@@ -2,6 +2,7 @@ module Jokes
   class ORM
     def initialize
       @db_adapter = PG::connect(host: 'localhost', dbname: 'jokes')
+      create_tables
     end
 
     def create_tables

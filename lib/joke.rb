@@ -6,5 +6,13 @@ module Jokes
       @question = question
       @answer = answer
     end
+
+    def to_json
+      JSON.generate({
+        id: id,
+        question: question,
+        answer: answer
+        })
+    end
   end
 end
