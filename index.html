@@ -18,10 +18,12 @@
         <div class="large-12 columns panel">
           <form id="joke-form">
             Joke Question:
-            <input label="question" name="question">
+            <input class="joke-form-question" label="question" name="question" type="text">
             <br>
             Joke Answer:
-            <input label="answer" name="answer">
+            <input class="joke-form-question" label="answer" name="answer" type="text">
+            <br>
+            <input label="submit" type="submit">
           </form>
           <div id="jokes"></div>
         </div>
@@ -31,5 +33,6 @@
       <script type="text/javascript" src="./js/jquery.min.js"></script>
       <script type="text/javascript" src="./js/foundation.min.js"></script>
       <script type="text/javascript">$(document).foundation();</script>
+      <script type="text/javascript" src="./js/application.js"></script>
     </body>
 </html>
