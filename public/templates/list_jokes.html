@@ -7,12 +7,20 @@
     </tr>
   </thead>
   <tbody>
+  <!-- ng-repeat will act as a loop that will go through the
+  $scope.jokes variable that was set in the controller. -->
     <tr ng-repeat="joke in jokes">
+    <!-- {{joke.question}} is telling angular to fill in this field with the property question in the joke object -->
       <td>{{joke.question}}</td>
       <td>{{joke.answer}}</td>
+      <!-- Here, you're setting ng-click. This means that when
+      someone clicks on this button, the delete method will be
+      called with joke.id as an argument -->
       <td><button ng-click="delete(joke.id)">Delete</button></td>
     </tr>
   </tbody>
 </table>
 
+<!-- Here we have a link to joke/new, but because it starts with
+the # sign, angular will manage the routing system. -->
 <a href="#/joke/new">NEW JOKE</a>

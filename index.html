@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- The portion saying ng-app let's angular know which part of your javascript code is controlling this app -->
 <html lang="en" ng-app="myJoke"> 
     <head>
         <meta charset="utf-8">
@@ -22,19 +23,8 @@
       </header>
       <div class="row">
         <h1>Here come the jokes!</h1>
+        <!-- This div will load either list_jokes.html or new_joke.html based on what the controllers determine -->
         <div ng-view></div>
-        <!-- <div class="large-12 columns panel">
-          <form id="joke-form">
-            Joke Question:
-            <input class="joke-form-question" label="question" name="question" type="text">
-            <br>
-            Joke Answer:
-            <input class="joke-form-answer" label="answer" name="answer" type="text">
-            <br>
-            <input label="submit" type="submit">
-          </form>
-          <div id="jokes"></div>
-        </div> -->
       </div>
 
       <!-- body goes here -->

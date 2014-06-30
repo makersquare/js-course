@@ -1,5 +1,10 @@
+<!-- By setting the ng-model property of this input element
+you're linking the input to the $scope.joke.question
+property. When you change this input, you will change the
+value of the javascript object too. -->
 Question: <input type="text" name="question" ng-model="joke.question" required>
 </br>
 Answer: <input type="text" name="question" ng-model="joke.answer" required>
 </br>
+<!-- When you click on this button, the save method will be called -->
 <button ng-click="save()">Save</button>
