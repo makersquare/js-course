@@ -25,6 +25,9 @@ get '/api/jokes' do
 end
 
 post '/api/joke', provides: :json do
+  # THIS IS VERY IMPORTANT. READ THIS!!!
+  # Because of how Angular sends parameters, you have
+  # to create your own params by parsing JSON
   puts params
   params = JSON.parse(request.body.read.to_s)
   joke_info = params["joke"]
