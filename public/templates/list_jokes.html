@@ -3,12 +3,14 @@
     <tr>
       <th>Question</th>
       <th>Answer</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="joke in jokes">
       <td>{{joke.question}}</td>
       <td>{{joke.answer}}</td>
+      <td><button ng-click="delete(joke.id)">Delete</button></td>
     </tr>
   </tbody>
 </table>

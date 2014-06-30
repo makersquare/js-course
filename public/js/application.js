@@ -16,9 +16,21 @@ angular.module('myJoke', ['ngRoute', 'ngResource'])
 })
 
 .controller('ListJokesCtrl', function($scope, $http) {
-  $scope.jokes = $http.get('/api/jokes').success(function(data){
-    $scope.jokes = data;
-  });
+  $scope.getJokes = function() {
+    $scope.jokes = $http.get('/api/jokes').success(function(data){
+      $scope.jokes = data;
+    });
+  }
+
+  $scope.getJokes();
+
+  $scope.delete = function(joke_id) {
+    $http({method: 'DELETE',
+           url: '/api/joke/' + joke_id
+    }).success(function(){
+      $scope.getJokes();
+    })
+  }
 })
 
 .controller('NewJokeCtrl', function($scope, $location, $timeout, $http) {
