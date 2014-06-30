@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="joke in jokes">
+      <td>{{joke.question}}</td>
+      <td>{{joke.answer}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<a href="#/joke/new">NEW JOKE</a>

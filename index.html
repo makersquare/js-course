@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myJoke"> 
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,12 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-resource.min.js">
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-route.min.js">
+       </script>
+       <script src="/js/application.js"></script>
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
     </head>
     <body>
@@ -15,7 +21,9 @@
       <header class="row">
       </header>
       <div class="row">
-        <div class="large-12 columns panel">
+        <h1>Here come the jokes!</h1>
+        <div ng-view></div>
+        <!-- <div class="large-12 columns panel">
           <form id="joke-form">
             Joke Question:
             <input class="joke-form-question" label="question" name="question" type="text">
@@ -26,7 +34,7 @@
             <input label="submit" type="submit">
           </form>
           <div id="jokes"></div>
-        </div>
+        </div> -->
       </div>
 
       <!-- body goes here -->

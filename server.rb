@@ -24,8 +24,9 @@ get '/api/jokes' do
   json @jokes
 end
 
-post '/api/joke' do
+post '/api/joke', provides: :json do
   puts params
+  params = JSON.parse(request.body.read.to_s)
   joke_info = params["joke"]
   joke = Jokes.orm.add_joke(
     joke_info["question"],
