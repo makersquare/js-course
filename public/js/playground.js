@@ -1,4 +1,4 @@
-var endpointCount = 72;
+var endpointCount = 77;
 for (var i = 0; i < endpointCount; i++) {
 	// Make a call to our server, requesting a set of data.
 	// The data we get back is a chunk of strings that form
