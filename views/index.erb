@@ -1,4 +1,17 @@
-<script src="/js/vendor/jquery-2.1.1.min.js"></script>
+<script src="/js/vendor/require.js"></script>
+<script>
+require.config({
+	baseUrl: "js",
+	path: {
+		'jquery': 'vendor/jquery-2.1.1.min'
+	},
+	shim: {
+		'jquery': {
+			exports: 'jQuery'
+		}
+	}
+});
+</script>
 <div id="container">
 </div>
 <script src="/js/playground.js"></script>
