@@ -14,7 +14,7 @@
     this.submitAnswer = function (answerIndex) {
       var question = this.getCurrentQuestion();
       var result = {
-        isCorrect: question.answerIndex == answerIndex,
+        isCorrect: question.answerIndex === answerIndex,
         answer: question.answerIndex,
         answerText: question.options[question.answerIndex]
       };
