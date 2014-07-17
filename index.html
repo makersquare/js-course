@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>Quizzy Quiz</title>
+  <style type="text/css">
+  .quiz-question { display: none; }
+  </style>
+</head>
+<body>
+
+<h2>Quizzy Quiz</h2>
+
+<div class="quiz-app">
+  <form class="start">
+    <input type="text" name="playerName" />
+    <button>Start Quiz</button>
+  </form>
+
+  <form class="quiz-question">
+    <div class="content"></div>
+    <div class="options"></div>
+
+    <div class="awaiting-answer">
+      <button type="submit">Submit Answer</button>
+    </div>
+    <div class="answered" style="display: none">
+      <button>Next Question</button>
+      <label>...</label>
+    </div>
+  </div>
+</div>
+
+<!-- 3rd-party Libraries -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- Application -->
+<script type="text/javascript" src="src/quizzy/quiz.js"></script>
+<script type="text/javascript" src="src/presentation/quiz-presenter.js"></script>
+<script type="text/javascript" src="src/quiz-repo.js"></script>
+<!-- Entry point -->
+<script type="text/javascript">
+  var $quizView = $('.quiz-app');
+  var presenter = new Quizzy.QuizPresenter( $quizView, Quizzy.hardcodedQuizData );
+</script>
+
+</body>
+</html>
