@@ -30,6 +30,10 @@ describe("Quiz", function() {
       expect(quiz.answers.length).toEqual(0);
     });
 
+    it("gets the question count", function() {
+      expect( quiz.getTotalQuestionCount() ).toEqual(2);
+    });
+
     it("has a score of zero", function() {
       expect(quiz.getScore()).toEqual(0);
     });

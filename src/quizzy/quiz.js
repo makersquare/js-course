@@ -29,6 +29,10 @@
       return result;
     };
 
+    this.getTotalQuestionCount = function () {
+      return questions.length;
+    };
+
     this.getScore = function () {
       return score;
     };
