@@ -6,7 +6,9 @@
 
     this.answers = [];
 
+    var score = 0;
     var currentQuestionIndex = 0;
+
     this.getCurrentQuestion = function () {
       return questions[currentQuestionIndex];
     };
@@ -19,10 +21,16 @@
         answerText: question.options[question.answerIndex]
       };
 
+      if (result.isCorrect) score += 1;
+
       this.answers.push(answerIndex);
       currentQuestionIndex += 1;
 
       return result;
+    };
+
+    this.getScore = function () {
+      return score;
     };
 
     this.isDone = function () {

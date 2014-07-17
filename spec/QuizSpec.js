@@ -30,6 +30,10 @@ describe("Quiz", function() {
       expect(quiz.answers.length).toEqual(0);
     });
 
+    it("has a score of zero", function() {
+      expect(quiz.getScore()).toEqual(0);
+    });
+
     it("is not done", function() {
       expect(quiz.isDone()).toEqual(false);
     });
@@ -56,6 +60,18 @@ describe("Quiz", function() {
     it("records the answer", function() {
       expect(quiz.answers.length).toEqual(1);
       expect(quiz.answers[0]).toEqual(3);
+    });
+  });
+
+  describe("#getScore", function () {
+    it("increases score for a correct answer", function() {
+      quiz.submitAnswer(3);
+      expect(quiz.getScore()).toEqual(1);
+    });
+
+    it("does not increase score for an incorrect answer", function() {
+      quiz.submitAnswer(0);
+      expect(quiz.getScore()).toEqual(0);
     });
   });
 
