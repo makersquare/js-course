@@ -2,12 +2,12 @@ describe("Quiz", function() {
   var quiz;
   var questions = [
     {
-      question: "How old are you?",
+      content: "How old are you?",
       options: [ "60", "80", "120", "None of the above" ],
       answerIndex: 3
     },
     {
-      question: "What is your favorite color?",
+      content: "What is your favorite color?",
       options: [ "red", "green", "orange", "apple" ],
       answerIndex: 2
     }
@@ -42,6 +42,7 @@ describe("Quiz", function() {
     it("returns the result", function() {
       expect(result.isCorrect).toEqual(true);
       expect(result.answer).toEqual(3);
+      expect(result.answerText).toEqual("None of the above");
     });
 
     it("moves to the next question", function() {

@@ -15,7 +15,8 @@
       var question = this.getCurrentQuestion();
       var result = {
         isCorrect: question.answerIndex == answerIndex,
-        answer: question.answerIndex
+        answer: question.answerIndex,
+        answerText: question.options[question.answerIndex]
       };
 
       this.answers.push(answerIndex);
