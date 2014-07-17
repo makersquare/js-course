@@ -29,6 +29,10 @@ describe("Quiz", function() {
     it("has an empty set of answers", function() {
       expect(quiz.answers.length).toEqual(0);
     });
+
+    it("is not done", function() {
+      expect(quiz.isDone()).toEqual(false);
+    });
   });
 
   describe("#submitAnswer", function () {
@@ -52,6 +56,20 @@ describe("Quiz", function() {
     it("records the answer", function() {
       expect(quiz.answers.length).toEqual(1);
       expect(quiz.answers[0]).toEqual(3);
+    });
+  });
+
+  describe("#isDone", function () {
+    it("is not done after a single submit", function() {
+      expect(quiz.isDone()).toEqual(false);
+      quiz.submitAnswer(0);
+      expect(quiz.isDone()).toEqual(false);
+    });
+
+    it("is done after all questions have been answered", function() {
+      quiz.submitAnswer(0);
+      quiz.submitAnswer(0);
+      expect(quiz.isDone()).toEqual(true);
     });
   });
 

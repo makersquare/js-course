@@ -24,6 +24,10 @@
 
       return result;
     };
+
+    this.isDone = function () {
+      return currentQuestionIndex >= questions.length;
+    };
   };
 
 })();
