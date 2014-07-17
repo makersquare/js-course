@@ -6,6 +6,7 @@
 
     var $startForm = $('form.start', $view);
     var $questionForm = $('form.quiz-question', $view);
+    var $finalResults = $('.final-results', $view);
     var quiz;
 
     $startForm.on('submit', function(e) {
@@ -38,7 +39,13 @@
 
     $('.answered button', $questionForm).on('click', function(e) {
       e.preventDefault();
-      displayNextQuestion();
+
+      if ( quiz.isDone() ) {
+        displayFinalResults();
+      }
+      else {
+        displayNextQuestion();
+      }
     });
 
 
@@ -59,6 +66,15 @@
       $('.answered', $questionForm).hide();
       $('.awaiting-answer', $questionForm).show();
       $questionForm.show();
+    };
+
+    var displayFinalResults = function () {
+      $questionForm.hide();
+
+      var scoreText = quiz.playerName + "'s score: " + quiz.getScore() + " / " + quiz.getTotalQuestionCount();
+      $('.score', $finalResults).text(scoreText);
+
+      $finalResults.show();
     };
 
   };

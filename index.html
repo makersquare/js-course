@@ -1,9 +1,6 @@
 <html>
 <head>
   <title>Quizzy Quiz</title>
-  <style type="text/css">
-  .quiz-question { display: none; }
-  </style>
 </head>
 <body>
 
@@ -11,11 +8,12 @@
 
 <div class="quiz-app">
   <form class="start">
+    <h3>Enter your name:</h3>
     <input type="text" name="playerName" />
     <button>Start Quiz</button>
   </form>
 
-  <form class="quiz-question">
+  <form class="quiz-question" style="display: none">
     <div class="content"></div>
     <div class="options"></div>
 
@@ -26,6 +24,12 @@
       <button>Next Question</button>
       <label>...</label>
     </div>
+  </form>
+
+  <div class="final-results" style="display: none">
+    <h3>You're done!</h3>
+    <h4 class="player-name"></h4>
+    <label class="score"></label>
   </div>
 </div>
 
