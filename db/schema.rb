@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720224906) do
+ActiveRecord::Schema.define(version: 20140721011653) do
 
   create_table "questions", force: true do |t|
     t.text     "question"
     t.text     "answer"
-    t.integer  "times_answered"
-    t.integer  "correct_answers"
+    t.integer  "times_answered",  default: 0, null: false
+    t.integer  "correct_answers", default: 0, null: false
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.string   "choices"
   end
 
   add_index "questions", ["quiz_id"], name: "index_questions_on_quiz_id"

@@ -3,8 +3,8 @@ class CreateQuestions < ActiveRecord::Migration
     create_table :questions do |t|
       t.text :question
       t.text :answer
-      t.integer :times_answered
-      t.integer :correct_answers
+      t.integer :times_answered, :default => 0, :null => false
+      t.integer :correct_answers, :default => 0, :null => false
       t.references :quiz, index: true
 
       t.timestamps

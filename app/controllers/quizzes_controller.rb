@@ -4,21 +4,17 @@ class QuizzesController < AJAXController
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = Quiz.all
+    render json: Quiz.all
   end
 
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
-  end
-
-  # GET /quizzes/new
-  def new
-    @quiz = Quiz.new
-  end
-
-  # GET /quizzes/1/edit
-  def edit
+    if @quiz
+      render json: @quiz
+    else
+      render status: 404, json: { status: :could_not_find }
+    end
   end
 
   # POST /quizzes
@@ -26,28 +22,20 @@ class QuizzesController < AJAXController
   def create
     @quiz = Quiz.new(quiz_params)
 
-    respond_to do |format|
-      if @quiz.save
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @quiz }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
-      end
+    if @quiz.save
+      render json: { status: :created, entity: @quiz }
+    else
+      render json: @quiz.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /quizzes/1
   # PATCH/PUT /quizzes/1.json
   def update
-    respond_to do |format|
-      if @quiz.update(quiz_params)
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
-      end
+    if @quiz.update(quiz_params)
+      render json: { status: 200, entity: @quiz }
+    else
+      render json: @quiz.errors, status: :unprocessable_entity
     end
   end
 
@@ -55,16 +43,17 @@ class QuizzesController < AJAXController
   # DELETE /quizzes/1.json
   def destroy
     @quiz.destroy
-    respond_to do |format|
-      format.html { redirect_to quizzes_url }
-      format.json { head :no_content }
-    end
+    head :no_content, status: 200
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
-      @quiz = Quiz.find(params[:id])
+      begin
+        @quiz = Quiz.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        return
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

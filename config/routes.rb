@@ -8,7 +8,9 @@ QuizzyNet::Application.routes.draw do
 
   # Example resource route with sub-resources:
   resources :quizzes do
-    resources :questions
+    resources :questions do
+      get "check" => "questions#check_answer"
+    end
   end
 
   resources :scores

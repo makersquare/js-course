@@ -5,20 +5,37 @@ class QuestionsController < AJAXController
   # GET /questions.json
   def index
     @questions = Question.all
+    render json: @questions
+  end
+
+  def check_answer
+    response = {}
+    @question = Question.find(params[:question_id])
+    if params[:answer] == @question.answer
+      @question.correct_answers = @question.correct_answers.to_i + 1
+      response['correct'] = true
+    else
+      response['correct'] = false
+    end
+    @question.times_answered = @question.times_answered.to_i + 1
+    @question.save
+    render json: response
   end
 
   # GET /questions/1
   # GET /questions/1.json
   def show
+    if @question
+      render json: @question
+    else
+      render status: 404, json: { status: :could_not_find }
+    end
   end
 
   # GET /questions/new
   def new
     @question = Question.new
-  end
-
-  # GET /questions/1/edit
-  def edit
+    render json: @question
   end
 
   # POST /questions
@@ -26,28 +43,20 @@ class QuestionsController < AJAXController
   def create
     @question = Question.new(question_params)
 
-    respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @question }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    if @question.save
+      render json: { status: :created, entity: @question }
+    else
+      render json: @question.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    if @question.update(question_params)
+      render json: { status: 200, entity: @question }
+    else
+      render json: @question.errors, status: :unprocessable_entity
     end
   end
 
@@ -55,20 +64,21 @@ class QuestionsController < AJAXController
   # DELETE /questions/1.json
   def destroy
     @question.destroy
-    respond_to do |format|
-      format.html { redirect_to questions_url }
-      format.json { head :no_content }
-    end
+    head :no_content, status: 200
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = Question.find(params[:id])
+      begin
+        @question = Question.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        return
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:question, :answer, :times_answered, :correct_answers, :quiz_id)
+      params.require(:question).permit(:question, :answer, :times_answered, :correct_answers, :quiz_id, :choices)
     end
 end

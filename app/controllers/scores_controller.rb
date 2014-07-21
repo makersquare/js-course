@@ -5,20 +5,17 @@ class ScoresController < AJAXController
   # GET /scores.json
   def index
     @scores = Score.all
+    render json: @scores
   end
 
   # GET /scores/1
   # GET /scores/1.json
   def show
-  end
-
-  # GET /scores/new
-  def new
-    @score = Score.new
-  end
-
-  # GET /scores/1/edit
-  def edit
+    if @score
+      render json: @score
+    else
+      render status: 404, json: { status: :could_not_find }
+    end
   end
 
   # POST /scores
@@ -26,28 +23,20 @@ class ScoresController < AJAXController
   def create
     @score = Score.new(score_params)
 
-    respond_to do |format|
-      if @score.save
-        format.html { redirect_to @score, notice: 'Score was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @score }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
+    if @score.save
+      render json: { status: :created, entity: @score }
+    else
+      render json: @score.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /scores/1
   # PATCH/PUT /scores/1.json
   def update
-    respond_to do |format|
-      if @score.update(score_params)
-        format.html { redirect_to @score, notice: 'Score was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
+    if @score.update(score_params)
+      render json: { status: 200, entity: @score }
+    else
+      render json: @score.errors, status: :unprocessable_entity
     end
   end
 
@@ -55,16 +44,17 @@ class ScoresController < AJAXController
   # DELETE /scores/1.json
   def destroy
     @score.destroy
-    respond_to do |format|
-      format.html { redirect_to scores_url }
-      format.json { head :no_content }
-    end
+    head :no_content, status: 200
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_score
-      @score = Score.find(params[:id])
+      begin
+        @score = Score.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        return
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
