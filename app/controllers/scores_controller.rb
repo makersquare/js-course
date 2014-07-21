@@ -1,10 +1,11 @@
 class ScoresController < AJAXController
   before_action :set_score, only: [:show, :edit, :update, :destroy]
+  before_action :set_quiz
 
   # GET /scores
   # GET /scores.json
   def index
-    @scores = Score.all
+    @scores = @quiz.scores.all
     render json: @scores
   end
 
@@ -21,7 +22,7 @@ class ScoresController < AJAXController
   # POST /scores
   # POST /scores.json
   def create
-    @score = Score.new(score_params)
+    @score = @quiz.scores.new(score_params)
 
     if @score.save
       render json: { status: :created, entity: @score }
@@ -51,10 +52,14 @@ class ScoresController < AJAXController
     # Use callbacks to share common setup or constraints between actions.
     def set_score
       begin
-        @score = Score.find(params[:id])
+        @score = @quiz.scores.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         return
       end
+    end
+
+    def set_quiz
+      @quiz = Quiz.find(params[:quiz_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

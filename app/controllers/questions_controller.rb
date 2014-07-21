@@ -1,16 +1,17 @@
 class QuestionsController < AJAXController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_quiz
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = @quiz.questions.all
     render json: @questions
   end
 
   def check_answer
     response = {}
-    @question = Question.find(params[:question_id])
+    @question = @quiz.questions.find(params[:question_id])
     if params[:answer] == @question.answer
       @question.correct_answers = @question.correct_answers.to_i + 1
       response['correct'] = true
@@ -32,16 +33,10 @@ class QuestionsController < AJAXController
     end
   end
 
-  # GET /questions/new
-  def new
-    @question = Question.new
-    render json: @question
-  end
-
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
+    @question = @quiz.questions.new(question_params)
 
     if @question.save
       render json: { status: :created, entity: @question }
@@ -71,14 +66,19 @@ class QuestionsController < AJAXController
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       begin
-        @question = Question.find(params[:id])
+        @question = @quiz.questions.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         return
       end
     end
 
+    def set_quiz
+      @quiz = Quiz.find(params[:quiz_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:question, :answer, :times_answered, :correct_answers, :quiz_id, :choices)
+      params.require(:question).permit(:question, :answer, :times_answered, :correct_answers, :quiz_id, :choices, :question_type)
     end
+
 end
