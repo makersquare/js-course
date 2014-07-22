@@ -309,7 +309,7 @@ Or...
 ### Get all scores
 
 ```
-GET /scores
+GET /quizzes/:id/scores
 ```
 
 **Response**
@@ -343,7 +343,7 @@ GET /scores
 ### Get a single score
 
 ```
-GET /scores/:id
+GET /quizzes/:id/scores/:id
 ```
 
 ***Response***
@@ -361,7 +361,7 @@ GET /scores/:id
 ### Create a score
 
 ```
-POST /scores/:id
+POST /quizzes/:id/scores/:id
 ```
 
 **Input**
@@ -398,7 +398,7 @@ All fields are required when first creating a score.
 ### Update a score
 
 ```
-PATCH/PUT /scores/:id
+PATCH/PUT /quizzes/:id/scores/:id
 ```
 
 **Input**
