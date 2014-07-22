@@ -277,7 +277,7 @@ PATCH/PUT /quizzes/:id/questions/:id
 ### Check answer against a question
 
 ```
-GET /quizzes/:id/questions/:id?answer=your_answer_here
+GET /quizzes/:id/questions/:id/check?answer=your_answer_here
 ```
 
 Returns a JSON array with a property `correct` which is `true` or `false` and internally updates the question's `times_answered` and `correct_answers` fields.
