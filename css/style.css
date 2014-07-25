@@ -1,0 +1,18 @@
+body {
+  background: url('../img/coolbg.jpg') no-repeat; 
+  background-size: cover; 
+} 
+
+.main { 
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+@media all and (max-width: 64rem) {
+  .main {
+    max-width: 90%;
+  }
+}

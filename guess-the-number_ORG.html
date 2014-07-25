@@ -1,0 +1,150 @@
+<html>
+<head>
+  <title>Guess the Number!</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.2.3/css/foundation.min.css">
+</head>
+	<body>
+		<label>Pick a Number from 1-100:</label>
+		<label id="response"></label>
+		<br />
+		<input id="user-input" type="text" />
+		<input id="submit-button" type="button" value="Guess" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript">
+				
+			var secretNumber;
+			var landmineNumber = [];
+			var guess;
+			var closestMine;
+
+			function genNums() {
+				secretNumber = parseInt(Math.random() * 100, 10) + 1;
+				landmineNumber[0] = parseInt(Math.random() * 100, 10) + 1;
+				landmineNumber[1] = parseInt(Math.random() * 100, 10) + 1;
+				landmineNumber[2] = parseInt(Math.random() * 100, 10) + 1;
+				// console.log("secret: " + secretNumber + " landmine: " + landmineNumber);
+				for (var i =0; i < landmineNumber.length; ++i) {
+					if (secretNumber === landmineNumber[i]) {
+					genNums() }
+				}
+			}
+			function numDiff() {
+				closestMine = undefined
+				// console.log("landmine numbers: " + landmineNumber);
+				$.each(landmineNumber, function(index, value) {
+				  if (closestMine === undefined || Math.abs(value - guess) < Math.abs(closestMine - guess)) {
+				    closestMine = value
+				  }
+				});
+				closestMine = Math.abs(closestMine - guess)
+				// console.log(closestMine);
+			}
+
+			function guessNum() {
+		  		guess = +$('#user-input').val();
+				if ($.inArray(guess, landmineNumber) > -1) {
+					$('#response').html("Oops! You hit a landmine! <strong>BOOM!</strong>");
+					genNums();
+				} else if (guess > secretNumber) {
+					numDiff();
+					$('#response').text("Nope! The secret number is lower; try again! Be careful, there is a landmine " + closestMine + " places away from your last guess!");
+				} else if (guess < secretNumber) {
+					numDiff();
+		  			$('#response').text("Nope! The secret number is higher; try again! Be careful, there is a landmine " + closestMine  + " places away from your last guess!");
+		  		} else { $('#response').text("You guessed the secret number!"); 
+					genNums();
+				};
+		  	}
+
+	  		genNums();
+
+			$('#submit-button').on('click', function (e) {
+				guessNum();
+				$('#user-input').val("");
+			});
+
+			// var secretNumber;
+			// var landmineNumber;
+			// var guess;
+			// var guessDiff;
+
+			// function genNums() {
+			// 	secretNumber = parseInt(Math.random() * 100, 10) + 1;
+			// 	landmineNumber = parseInt(Math.random() * 100, 10) + 1;
+			// 	// alert("secret: " + secretNumber + " landmine: " + landmineNumber);
+			// 	if (secretNumber === landmineNumber) {
+			// 		genNums() }
+			// }
+			// function numDiff() {
+			// 	if (guess > landmineNumber) {
+			// 		guessDiff = (guess - landmineNumber);
+			// 	} else { 
+			// 		guessDiff = (landmineNumber - guess);
+			// 	}
+			// }
+			// function guessNum() {
+		 //  		guess = +$('#user-input').val();
+			// 	if (guess === landmineNumber) {
+			// 		$('#response').text("Oops! You chose the landmine number! BOOM!");
+			// 	} else if (guess > secretNumber) {
+			// 		numDiff();
+			// 		$('#response').text("Nope! The secret number is lower; try again! Be careful, the landmine is " + guessDiff + " places away from your last guess!");
+			// 		$('#user-input').val("");
+			// 		//guessNum(); 
+			// 	} else if (guess < secretNumber) {
+			// 		numDiff();
+		 //  			$('#response').text("Nope! The secret number is higher; try again! Be careful, the landmine is " + guessDiff  + " places away from your last guess!");
+		 //  			$('#user-input').val("");
+		 //  			//guessNum();
+			// 	} else { $('#response').text("You guessed the secret number!"); 
+			// 		genNums();
+			// 	};
+		 //  	}
+
+	  // 		genNums();
+
+			// $('#submit-button').on('click', function (e) {
+			// 	guessNum();
+			// });
+
+			// var secretNumber;
+			// var landmineNumber;
+			// var guess;
+			// var guessDiff;
+
+			// function genNums() {
+			// secretNumber = parseInt(Math.random() * 100, 10) + 1;
+			// landmineNumber = parseInt(Math.random() * 100, 10) + 1;
+			// alert("secret: " + secretNumber + " landmine: " + landmineNumber)
+			// if (secretNumber === landmineNumber) {
+			// genNums() }
+			// };
+			// function numDiff() {
+			// if (guess > landmineNumber) {
+			// guessDiff = (guess - landmineNumber);
+			// } else {
+			// guessDiff = (landmineNumber - guess);
+			// };
+			// }
+			// function guessNum() {
+			//    guess = prompt("Guess a number between 1 and 100");
+			// if (Number(guess) === landmineNumber) {
+			// alert("Oops! You chose the landmine number! BOOM!");
+			// } else if (guess > secretNumber) {
+			// numDiff();
+			// alert("Nope! The secret number is lower; try again! Be careful, the landmine is " + guessDiff + " places away from your last guess!");
+			// guessNum();
+			// } else if (guess < secretNumber) {
+			// numDiff();
+			//    alert("Nope! The secret number is higher; try again! Be careful, the landmine is " + guessDiff + " places away from your last guess!");
+			//    guessNum();
+			// } else { alert("You guessed the secret number!"); };
+			//    };
+
+			// genNums();
+			// guessNum();
+
+		</script>
+
+	</body>
+</html>
