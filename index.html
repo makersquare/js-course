@@ -1,0 +1,86 @@
+<html>
+<head>
+  <title>Guess the Number!</title>
+  <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css">  
+  <style>
+    body {
+      background-color: #86cf74;
+      background-image: url('images/argyle.png');
+    }
+
+    .top-bar {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">Catherine O'Neill -- Number Guessing</a></h1>
+      </li>
+    </ul>
+  </nav>
+
+  <div class = "row">
+    <div class="large-12 columns panel">
+    	<h2>Guess the Number Game</h2>
+      <p>Please guess a number between 1 and 100. But stay away from the landmine numbers!</p>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="large-12 columns panel">
+      
+      <div class="large-3 columns large-centered">
+        <button id="start-button">START NEW GAME!</button>
+      </div>
+
+      <form class="hide" id= "guessdiv">
+        <div class="row">
+
+          <div class="large-6 columns large-centered">
+            <label>Enter your guess:
+              <input name="guess" type="text" id="guess" placeholder="Enter a number."></input>
+            </label>
+            <button type="submit" id="submit-button">SUBMIT</button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class = "hide row" id ="feedback">
+    <div class = "small-12 columns panel">
+    <div class="small-centered small-8 large-4 columns">     
+        <p id="feedback_text"></p>
+    </div>
+    </div>
+  </div>
+
+  <div class = "hide row" id ="landmineDiv">
+    <div class="small-12 columns panel">  
+      <div class="small-4 columns">
+        <div class="small-10 small-centered columns alert-box success landmine" id = "landmine1">
+          Landmine #1
+        </div> 
+      </div> 
+      <div class="small-4 columns">
+        <div class="small-10 small-centered columns alert-box success landmine" id="landmine2">
+          Landmine #2
+        </div>   
+      </div> 
+      <div class="small-4 columns">
+        <div class="small-10 small-centered columns alert-box success landmine" id = "landmine3">
+        Landmine #3
+      </div>      
+    </div>
+  </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/business-logic.js"></script>
+<script src="js/presentation-UI.js"></script>
+
+</body>
+</html>
