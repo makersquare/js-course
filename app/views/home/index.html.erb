@@ -1,3 +1,14 @@
 <h2>Quizzy Quiz</h2>
 
-<p>Your single page app should go here.</p>
+<div class="quiz-app">
+</div>
+
+<!-- Entry point -->
+<script type="text/javascript">
+  var $quizView = $('.quiz-app');
+  var Application = {
+    presenter: new Quizzy.QuizPresenter($quizView)
+  };
+</script>
+
+</body>
