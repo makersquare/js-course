@@ -1,0 +1,66 @@
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	function addMessage(user, message) {
+		var template = [
+			'<li>',
+				user + ': ',
+				message,
+			'</li>'
+		].join('');
+		$('#chatbox').append(template)
+	}
+
+	var socket = io();
+	socket.on('chat', function(message) {
+		console.log('WHOA!', message);
+		addMessage(message.user, message.message);
+		$("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
+	});
+</script>
+<style>
+	#chatbox {
+		overflow: scroll;
+	}
+	ul {
+		border: 1px solid black;
+		width: 300px;
+		height: 400px;
+		list-style-type: none;
+		padding: 0;
+	}
+	li:nth-of-type(2n) {
+		background-color: #ccc;
+		width: 100%;
+	}
+</style>
+
+<h1>Way's suh-weet socket-powered chat app</h1>
+
+<ul id="chatbox">
+</ul>
+
+<label for="name">name</label>
+<input type="text" name="name" id="name">
+<label for="message">message</label>
+<input type="text" name="message" id="message">
+<input type="submit" id="send">
+
+<script>
+	$('#send').on('click', sendMessage);
+	$("#message").keyup(function (e) {
+	    if (e.keyCode == 13) {
+	        sendMessage();
+	    }
+	});
+
+	function sendMessage() {
+		var user    = $('#name').val();
+		var message = $('#message').val();
+		$('#message').val('');
+		socket.emit('chat', {
+			user: user,
+			message: message
+		});
+	}
+</script>
