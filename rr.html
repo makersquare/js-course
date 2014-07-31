@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title>Restaurant Reservations</title>
+  <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css">  
+</head>
+	<body>
+		<div class="row">
+			<div class="columns large-12">
+				<h2>Reservations!</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns large-4">
+				<form action="" id="claim">
+					<label for=""> <h4>Claim a Reservation</h4>
+						<input type="text"  name="claim-name" id="claim-name" placeholder="Enter name here.">
+						<input type="submit" class="button">
+					</label>
+				</form>
+				<div class="panel hide" id="claim-feedback"></div>
+			</div>
+			<div class="columns large-4">
+				<form id = "reserve">
+					<label for=""><h4>Make a Reservation</h4>
+						<input type="text"  name="reserve-name" id="reserve-name"placeholder="Enter name here.">
+						<input type="submit" class="button">
+					</label>
+				</form>
+				<div class="panel hide" id="reserve-feedback"></div>
+			</div>
+			<div class="columns large-1"></div>
+			<div class="columns large-3">
+				<h4>Reservations</h4>
+				<ul id="reservationslist">
+					<!-- insert reservations here -->
+				</ul>
+				<button class="columns large-8" id="update">Update Reservation List</button>
+			</div>
+		</div>
+
+			<script type="text/templates" class="template">
+            	<%  for(var name in reservations){ %>
+                <% if ( !reservations[name]["claimed"] ){ %>
+                <li>
+                    <%- name %>
+                </li>
+ 				<% }; %>
+ 				<% }; %>
+			</script>
+
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
+		<script type="text/javascript" src="js/reservations.js"></script>
+		<script type="text/javascript" src="js/logic.js"></script>
+		<script type="text/javascript" src="js/presentation.js"></script>
+	</body>
+</html>
+
