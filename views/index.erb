@@ -12,5 +12,9 @@
     LEVEL 2: Upon retrieving all of the callbacks from the server, sort them and construct the entire ordered string.
       Append them to #container. NOTE: to make sure that the string looks right, run a RegExp replace on the final string
       to replace "\n" with "<br />".
+
+    LEVEL 3: Add a button to kick off this entire sequence. Upon receiving and appending your data from the server to the
+    DOM, use setTimeout() to wait 3 seconds, and then request the data from the server again. Put these chunks in reverse
+    order and append them to the DOM again.
   */
 </script>
