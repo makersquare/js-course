@@ -27,7 +27,11 @@ var onLoad = function() {
     }
     displayPost(post);
     for(var j = 0; j < post.comments.length; j++) {
-      displayComment(post.id, post.comments[j]);
+      var comment = post.comments[j];
+      if (comment.comment.length > 50 && shortText) {
+        comment = shortenComment(comment);
+      }
+      displayComment(post.id, comment);
     }
   }
 };
@@ -40,6 +44,15 @@ var shortenPost = function(post) {
   shortenedPost.status = post.status.substr(0, 47) + "...";
   return shortenedPost;
 };
+
+var shortenComment = function(comment) {
+  var shortenedComment = {};
+  for(var property in comment) {
+    shortenedComment[property] = comment[property];
+  }
+  shortenedComment.comment = comment.comment.substr(0, 47) + "...";
+  return shortenedComment;
+}
 
 var createPost = function(post) {
   posts.push({
