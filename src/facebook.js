@@ -22,36 +22,27 @@ var onLoad = function() {
   clearPosts();
   for (var i = 0; i < posts.length; i++) {
     var post = posts[posts.length - i - 1];
-    if (post.status.length > 50 && shortText) {
-      post = shortenPost(post);
-    }
+    post = shortenItem(post, 'status');
     displayPost(post);
     for(var j = 0; j < post.comments.length; j++) {
       var comment = post.comments[j];
-      if (comment.comment.length > 50 && shortText) {
-        comment = shortenComment(comment);
-      }
+      comment = shortenItem(comment, 'comment');
       displayComment(post.id, comment);
     }
   }
 };
 
-var shortenPost = function(post) {
-  var shortenedPost = {};
-  for (var property in post) {
-    shortenedPost[property] = post[property];
+var shortenItem = function(item, shortProp) {
+  if (shortText && item[shortProp].length > 50) {
+    var shortenedItem = {};
+    for(var property in item) {
+      shortenedItem[property] = item[property];
+    }
+    shortenedItem[shortProp] = item[shortProp].substr(0, 47) + "...";
+    return shortenedItem;
+  } else {
+    return item;
   }
-  shortenedPost.status = post.status.substr(0, 47) + "...";
-  return shortenedPost;
-};
-
-var shortenComment = function(comment) {
-  var shortenedComment = {};
-  for(var property in comment) {
-    shortenedComment[property] = comment[property];
-  }
-  shortenedComment.comment = comment.comment.substr(0, 47) + "...";
-  return shortenedComment;
 }
 
 var createPost = function(post) {
