@@ -22,11 +22,23 @@ var onLoad = function() {
   clearPosts();
   for (var i = 0; i < posts.length; i++) {
     var post = posts[posts.length - i - 1];
+    if (post.status.length > 50 && shortText) {
+      post = shortenPost(post);
+    }
     displayPost(post);
     for(var j = 0; j < post.comments.length; j++) {
       displayComment(post.id, post.comments[j]);
     }
   }
+};
+
+var shortenPost = function(post) {
+  var shortenedPost = {};
+  for (var property in post) {
+    shortenedPost[property] = post[property];
+  }
+  shortenedPost.status = post.status.substr(0, 47) + "...";
+  return shortenedPost;
 };
 
 var createPost = function(post) {
@@ -62,4 +74,7 @@ var likePost = function(postId) {
 
 var shortText = false;
 
-var toggleShortText = function() {};
+var toggleShortText = function() {
+  shortText = !shortText;
+  onLoad();
+};
