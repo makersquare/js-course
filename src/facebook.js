@@ -18,13 +18,47 @@ var posts = [
   }
 ];
 
-var onLoad = function() {};
+var onLoad = function() {
+  clearPosts();
+  for (var i = 0; i < posts.length; i++) {
+    var post = posts[posts.length - i - 1];
+    displayPost(post);
+    for(var j = 0; j < post.comments.length; j++) {
+      displayComment(post.id, post.comments[j]);
+    }
+  }
+};
 
-var createPost = function(post) {};
+var createPost = function(post) {
+  posts.push({
+    status: post,
+    likes: 0,
+    likedByMe: false,
+    id: posts.length,
+    comments: []
+  });
+  onLoad();
+};
 
-var likePost = function(postId) {};
+var addComment = function(postId, comment) {
+  posts[postId].comments.push({
+    comment: comment,
+    id: posts[postId].comments.length
+  });
+  onLoad();
+};
 
-var addComment = function(postId, comment) {};
+var likePost = function(postId) {
+  var post = posts[postId];
+  if (post.likedByMe) {
+    post.likedByMe = false;
+    post.likes -= 1;
+  } else {
+    post.likedByMe = true;
+    post.likes += 1;
+  }
+  onLoad();
+};
 
 var shortText = false;
 
