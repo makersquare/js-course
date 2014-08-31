@@ -51,4 +51,8 @@ $(document).ready(function(){
     var statusText = $(".statusForm .statusText").val();
     createPost(statusText);
   });
+
+  $('.toggleShortText').click(function(){
+    toggleShortText();
+  })
 })

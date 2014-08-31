@@ -58,7 +58,7 @@ Implement the `onLoad` function. This function should display all posts and comm
 
 ---
 
-Implement the `createPost` function. This function should add a new post to the `posts` array and display it immediately.
+Implement the `createPost` function. This function should add a new post to the `posts` array and display it immediately. Note that the posts `id` should be it's position in the posts array.
 
 ---
 
@@ -71,6 +71,8 @@ Implement the `likePost` function. This function should look at whether or not y
 ---
 
 Implement `toggleShortText` - This button should toggle whether the `shortText` variable is true or false. If true, it should display all posts that are longer than 50 characters as their first 47 characters followed by "...".
+
+Be sure to take a look at the `substr` function for Strings.
 
 ---
 
