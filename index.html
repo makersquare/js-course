@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="jquery-2.1.1.min.js"></script>
+		<script src="underscore-min.js"></script>
+	</head>
+	<body>
+		<div id="quiz-app"></div>
+		<script type="text/template" id="template-question">
+			<div>
+				<h2><%= question %></h2>
+				<% for (var i in choices) { %>
+					<input type="radio" name="<%= name %>" value="<%= choices[i] %>"><%= choices[i] %>
+				<% } %>
+				<input type="submit">
+			</div>
+		</script>
+		<script type="text/template" id="template-results">
+			<div>
+				<h2>You got <%= quiz.currentScore %> out of <%= quiz.questionModels.length %>! That is <%= quizScore %>%!</h2>
+				<button class="js-back">do it again</button>
+				<h2>High Scores</h2>
+				<ol>
+				<% for (var i in highScores) { %>
+					<% var score = highScores[i]; %>
+					<li><%= score.name %> - <%= score.score %>%</li>
+				<% } %>
+				</ol>
+			</div>
+		</script>
+		<script type="text/template" id="template-quiz">
+			<div>
+				<h2><%= name %></h2>
+				<button class="js-back">nevermind</button>
+				<div class="quiz-questions"></div>
+			</div>
+		</script>
+		<script type="text/template" id="template-create-quiz">
+			<div>
+				<h2>
+					<%= edit ? 'Edit' : 'Create' %>
+					a Quiz
+				</h2>
+				<button class="js-back">nevermind</button>
+				<label for="quiz-name">Quiz Name</label>
+				<input id="quiz-name" type="text"
+					<%= edit ? 'value="' + quiz.title +'"' : '' %>
+				>
+				<% if (edit) { %>
+				<div class="quiz-questions">
+					<ul>
+						<% for (var i in quiz.questionModels) { %>
+							<li>
+								<%= quiz.questionModels[i].question %>
+								<a href="#" class="js-edit-question" data-id="<%= quiz.questionModels[i].id %>">
+									edit
+								</a>
+							</li>
+						<% } %>
+					</ul>
+				</div>
+				<% } %>
+				<button class="js-create-question">add question</button>
+				<button class="js-done"><%= edit ? 'Update' : 'Create' %></button>
+			</div>
+		</script>
+		<script type="text/template" id="template-create-question">
+			<div>
+				<h2>
+					<%= edit ? 'Edit' : 'Create' %>
+					a Question
+				</h2>
+				<button class="js-back">nevermind</button>
+				<br>
+				<label for="question">Question</label>
+				<input id="question" type="text"
+					<%= edit ? 'value="' + question.question +'"' : '' %>
+				>
+				<br>
+				<div class="choices">
+				<% if (edit) { %>
+					<% for (var i in quiz.choices) { %>
+						<label for="choice<%= i %>">Choice <%= i %></label>
+						<input id="choice<%= i %>" class="choice-input" type="text">
+					<% } %>
+				<% } else { %>
+					<label for="choice1">Choice 1</label>
+					<input id="choice1" class="choice-input" type="text">
+					<br>
+					<label for="choice2">Choice 2</label>
+					<input id="choice2" class="choice-input" type="text">
+					<br>
+					<label for="choice3">Choice 3</label>
+					<input id="choice3" class="choice-input" type="text">
+					<br>
+					<label for="choice4">Choice 4</label>
+					<input id="choice4" class="choice-input" type="text">
+					<br>
+				<% } %>
+				</div>
+				<button class="js-add-choice">add another choice</button>
+				<label for="answer">Answer</label>
+				<input id="answer" type="text"
+					<%= edit ? 'value="' + question.answer +'"' : '' %>
+				>
+				<button class="js-done"><%= edit ? 'Update' : 'Create' %></button>
+			</div>
+		</script>
+		<script type="text/template" id="template-listing">
+			<div>
+				<h2>Available Quizzes</h2>
+				<button class="js-make-quiz">Make Your Own Quiz</button>
+				<div class="available-quizzes">
+					<ul>
+					<% for (var i = 0; i < quizzes.length; i++) { %>
+						<li>
+							<a href="#" data-id="<%= quizzes[i].id %>" class="js-take-quiz">
+								<%= quizzes[i].title %>
+							</a>
+							| 
+							<a href="#" class="js-edit-quiz" data-id="<%= quizzes[i].id %>">
+								edit
+							</a>
+						</li>
+					<% } %>
+					</ul>
+				</div>
+			</div>
+		</script>
+		<script src="main.js"></script>
+		<script src="controllers/quizzy.js"></script>
+		<script src="models/quiz.js"></script>
+		<script src="models/question.js"></script>
+		<script src="views/editQuestion.js"></script>
+		<script src="views/editQuiz.js"></script>
+		<script src="views/createQuiz.js"></script>
+		<script src="views/createQuestion.js"></script>
+		<script src="views/listing.js"></script>
+		<script src="views/question.js"></script>
+		<script src="views/quiz.js"></script>
+		<script src="views/results.js"></script>
+		<script>
+			var myFancyQuizData = {
+				quizTitle: "This is Way's Fancy Quiz",
+				questions: [
+					{
+						question: "What is the capital of Texas?",
+						answer: "Austin",
+						name: "capital",
+						choices: [
+							"Austin",
+							"Germany",
+							"Novascotia"
+						]
+					},
+					{
+						question: "What is Way's favorite color?",
+						answer: "green",
+						name: "color",
+						choices: [
+							"green",
+							"blah",
+							"vomit color"
+						]
+					},
+					{
+						question: "What is the greatest language?",
+						name: "language",
+						answer: "JavaScript",
+						choices: [
+							"JavaScript",
+							"Scala",
+							"Clojure",
+							"Ruby"
+						]
+					}
+				]
+			};
+
+			Quizzy.start('#quiz-app', myFancyQuizData);
+		</script>
+	</body>
+</html>
