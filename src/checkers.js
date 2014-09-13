@@ -30,7 +30,7 @@ var attemptMove = function (row1, col1, row2, col2) {
     return false;
   }
 
-  var direction = (currentPlayer == 'red') ? 1 : -1;
+  var direction = (currentPlayer == 'red') ? -1 : 1;
 
   var enemy = (currentPlayer == 'red') ? 'wht' : 'red';
 

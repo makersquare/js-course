@@ -8,10 +8,39 @@ var charToNum = {
   f: 5,
   g: 6,
   h: 7
-}
+};
+
+var move;
+
+var getMove = function () {
+  move = {
+    startRow: null,
+    startCol: null,
+    endRow: null,
+    endCol: null
+  }
+};
+
+var updateMove = function (e) {
+  var piece = $(e.currentTarget);
+  var row = $('.row').index(piece.parent());
+  var col = piece.parent().children().index(piece);
+  if (!move.startRow || !move.startCol) {
+    move.startRow = row;
+    move.startCol = col;
+    $('.start').empty().append("row: " + row + ", col: " + col);
+  } else {
+    move.endRow = row;
+    move.endCol = col;
+    console.log('click');
+    attemptMove(move.startRow, move.startCol, move.endRow, move.endCol);
+    getMove();
+  }
+};
 
 var play = function () {
   resetBoard();
+  getMove();
 };
 
 var displayBoard = function () {
@@ -34,4 +63,13 @@ var displayPiece = function (element, piece) {
   }
 };
 
-$(document).on('boardChange', displayBoard);
+$(document).ready(function() {
+  $(document).on('boardChange', displayBoard);
+  $(document).on('boardChange', getMove);
+  $('.col').on('click', updateMove);
+});
+
+var displayError = function (e, error) {
+  console.log(error);
+};
+$(document).on('invalidMove', displayError);
