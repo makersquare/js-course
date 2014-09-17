@@ -2,6 +2,26 @@
 
 The goal of this application is to get a better understanding of how callbacks work. You will be using events/event handlers a lot more than you generally would in a real application. However, it's still important to practice this because it will help you understand the asynchronous nature of JavaScript.
 
+# Set up
+
+```console
+$ cd to/some/folder
+$ git clone https://github.com/makersquare/js-course checkers-start
+$ cd checkers-start
+$ git checkout checkers-start
+# This updates your remote pointer to point to your own fork
+$ git remote rm origin
+$ git remote add origin https://github.com/YOUR_GITHUB_USERNAME/js-course
+```
+
+The files you should look at include:
+
+* README.md
+* index.html
+* src/checkers.js
+* src/console_driver.js
+* css/app.css
+
 # Checkers
 
 Make sure you understand the game of checkers. Your goal is to implement a subset of the features.
