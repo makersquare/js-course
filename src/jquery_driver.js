@@ -63,7 +63,7 @@ var displayPiece = function (element, piece) {
   }
 };
 
-$(document).ready(function() {
+$(document).on('ready', function() {
   $(document).on('boardChange', displayBoard);
   $(document).on('boardChange', getMove);
   $('.col').on('click', updateMove);
