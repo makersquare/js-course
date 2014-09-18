@@ -1,0 +1,114 @@
+<script src="/js/vendor/jquery-2.1.1.min.js"></script>
+<div id="container">
+</div>
+<script src="/js/wiki.js"></script>
+<script src="/js/pagetext.js"></script>
+<script src="/js/markov.js"></script>
+<script src="/js/main.js"></script>
+<script>
+  /**
+
+    MODULE ASSIGNMENT
+
+    Be careful--the instructions are tricky, so pay close attention!
+
+    0. Start by familiarizing yourself with how the Markov module and Markov
+    chain text generators work in general. Try and pass in some input to the
+    Markov module and call .gen() on it (making sure to pass a length of output)
+    and see what you get.
+
+    1. Create a MarkovView module that contains a view which appends itself to
+    the DOM. The view should contain two text areas and a button. When pressed,
+    the button will take text from the first text area and pass it to the Markov
+    module, and place the output into the second text area.
+
+    2. Create a UpperLower module that takes in an input string and returns
+    a new string with alternatively upper- and lower-cased characters. This
+    module should depend on and use the functionality of the Upper and Lower
+    modules. Alter your MarkovView module so that it depends on this module
+    and add a button to your first module that will transform the text in the
+    first text area by using this UpperLower module.
+
+    3. Create a ModifyString module that takes an input string in some way and
+    returns a new string that is modified. It's entirely up to you how you'd
+    like to modify this string! Once complete, make your UpperLower and ModifyString
+    modules consistent enough in usage that you can swap out UpperLower for your
+    ModifyString module without having to change the code in your MarkovView module.
+
+    4. Create a module that generates a random string. It's entirely up to you how
+    to implement this randomly, but make sure you have spaces in your string.
+    Once complete, integrate it into your MarkovView module as a dependency
+    and add a "random" button to the first module. When clicked, that button
+    should call this module's text generation function and put text into the
+    first text area of your first module.
+
+    By this point, your MarkovView module's view should have three buttons: the
+    button to modify your first text area's text, the button to randomly generate
+    text, and the button to actually generate Markov chain text.
+
+    5. Create a WikiRequestView module that also contains a view which appends itself
+    to the DOM. This module will depend on our WikiService and will get the
+    text of Wikipedia pages. The view should contain two text inputs and
+    a button. The first text input will be where you can input the title of
+    the Wikipedia page you want, and the second text input will be the number
+    of paragraphs from the Wikipedia page that you want. The button will trigger
+    the .get() method on the WikiService module, pass the data received to the
+    Markov module, and then append that resulting string to the second text
+    area of the first MarkovView module.
+
+    With that requirement in mind, the module should depend on the second text area
+    of the view of the module you created in step one. This is because we will be
+    using the inputs from this second module to output text to the second text area
+    of the MarkovView module.
+
+    6. Create a PageRequestView module that also contains a view which appends itself
+    to the DOM. This module will depend on our PageTextService module and will
+    get the text from any page on the internet we specify. The view should contain
+    one text input and one button. The text input takes a URL. The button will
+    trigger the .get() method on the PageTextService module, pass the data received
+    to the Markov module, and then append that resulting string to the second text
+    area of the first MarkovView module. Similar to the previous step, this module
+    depends on the MarkovView module.
+
+    7. Alter the WikiService module so that if you do not pass a paragraphCount
+    parameter (just the title and callback), it will set callback to equal
+    paragraphCount, and then set paragraphCount to 100. This is how we implement
+    "optional" parameters in JavaScript.
+
+    8. Alter your third PageRequestView module to use the WikiService module
+    instead of the PageTextService module. Notice how since we altered WikiService
+    to function similarly to PageText, we can utilize them interchangeably without
+    changing any code. All we need to change is the string that we pass to the first input.
+
+    -- INTERMISSION ---
+
+    Guess what? Every time you've been loading the Markov module with new inputs,
+    the server was saving that information to a text file called "corpus.txt" in your
+    directory--you may have noticed this already. You can actually make a GET request
+    to "/corpus" on your server and receive all of the text inside "corpus.txt". The
+    Markov module also sends a POST request to "/corpus" which adds the text to the
+    "corpus.txt" file on your server.
+
+    Furthermore, you can send a GET request to "/corpus/:ip" with the IP of the
+    Markov server that a fellow classmate is hosting to get their corpus. Ask an
+    instructor how to find out what your IP is on the local network.
+
+    HINT: There's a security vulnerability here! What is it?
+
+    NOTE: To get your Sinatra server available on the local network to your
+    classmates, you must run your server locally, i.e. NOT on Vagrant, with
+    "bundle exec ruby markovserver.rb -o 0.0.0.0".
+
+    -- RESUME --
+
+    FIN: Given the information in the intermission, create a MarkovCorpusService
+    module which gets the contents of the "corpus.txt" file from a fellow classmate.
+    From there, create a new MarkovCorpusRequestView module which contains a view
+    with an input field and a button. The input field should take an IP address
+    (no "http://" or port included, just something like 192.168.0.4). The button
+    will trigger an AJAX GET request with jQuery to "/corpus/:ip" where ":ip" is
+    the value in the input field. Once the AJAX request completes, you should
+    update the first text area of your MarkovView module with it.
+
+  */
+</script>
