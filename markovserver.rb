@@ -3,9 +3,10 @@ require 'json'
 require 'wikiwhat'
 require 'nokogiri'
 require 'sanitize'
+require 'cgi'
 
 # Comment this out if you're not using Vagrant.
-set :bind, '10.10.10.10'
+# set :bind, '10.10.10.10'
 
 get '/' do
 	erb :index
@@ -20,7 +21,8 @@ end
 
 # Return the text of any website
 get '/text' do
-	uri = URI(params[:url])
+	url = CGI.unescapeHTML(params[:url])
+	uri = URI(url)
 	html = Net::HTTP.get(uri)
 	html = Nokogiri::HTML(html)
 	blacklist = ['title', 'script', 'style']
@@ -36,7 +38,7 @@ get '/text' do
 end
 
 # Gets the corpus of this server
-get '/corpus' do
+get '/corpus/?' do
 	File.read("corpus.txt")
 end
 

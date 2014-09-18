@@ -1,6 +1,7 @@
 var MarkovView = (function($, Markov, modifier, random) {
-	var generateMarkov = function(input) {
-		return new Markov(input, "ww").gen(50);
+	var generateMarkov = function(input, length) {
+		length = length || 50;
+		return new Markov(input, "ww").gen(length);
 	}
 	function Constructor(containerSelector) {
 		var $container = $(containerSelector);
@@ -27,7 +28,7 @@ var MarkovView = (function($, Markov, modifier, random) {
 		// Markov conversion
 		this.$view.find('.markov-button').on('click', function() {
 			var input  = this.$input.val();
-			var output = generateMarkov(input);
+			var output = generateMarkov(input, 100);
 			this.$output.val(output);
 		}.bind(this));
 

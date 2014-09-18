@@ -2,6 +2,7 @@
 </div>
 <div class="templates">
     <script type="text/template" id="markov-view">
+        <h1>Markovifier</h1>
         <div class="markov-view">
             <label>Input</label>
             <textarea class="input-textarea"></textarea>
@@ -10,6 +11,32 @@
             <button class="modify-button">Modify!</button>
             <button class="random-button">Random string!</button>
             <button class="markov-button">Markovify!</button>
+        </div>
+    </script>
+    <script type="text/template" id="wiki-view">
+        <h2>Wiki Text Request</h2>
+        <div class="wiki-view">
+            <label>Wiki Page Title</label>
+            <input class="title-input" type="text">
+            <label>Paragraphs</label>
+            <input class="paragraphs-input" type="number">
+            <button class="wiki-button">Get Wikipedia Text</button>
+        </div>
+    </script>
+    <script type="text/template" id="page-view">
+        <div class="wiki-view">
+            <h2>Page Text Request</h2>
+            <label>Page URL</label>
+            <input class="url-input" type="text">
+            <button class="page-button">Get Page Text</button>
+        </div>
+    </script>
+    <script type="text/template" id="corpus-view">
+        <div class="corpus-view">
+            <h2>Corpus Request</h2>
+            <label>IP</label>
+            <input class="ip-input" type="text">
+            <button class="corpus-button">Get Corpus</button>
         </div>
     </script>
 </div>
@@ -24,6 +51,10 @@
 <script src="/js/pagetext.js"></script>
 <script src="/js/markov.js"></script>
 <script src="/js/markovView.js"></script>
+<script src="/js/wikiRequestView.js"></script>
+<script src="/js/corpusService.js"></script>
+<script src="/js/corpusRequestView.js"></script>
+<script src="/js/pageRequestView.js"></script>
 <script src="/js/main.js"></script>
 <script>
   /**
@@ -66,9 +97,9 @@
     button to modify your first text area's text, the button to randomly generate
     text, and the button to actually generate Markov chain text.
 
-    5. Create a WikiRequestView module that also contains a view which appends itself
-    to the DOM. This module will depend on our WikiService and will get the
-    text of Wikipedia pages. The view should contain two text inputs and
+    5. Create a WikiRequestView module that also contains a view which appends
+    itself to the DOM. This module will depend on our WikiService and will get
+    the text of Wikipedia pages. The view should contain two text inputs and
     a button. The first text input will be where you can input the title of
     the Wikipedia page you want, and the second text input will be the number
     of paragraphs from the Wikipedia page that you want. The button will trigger

@@ -1,5 +1,9 @@
 var WikiService = (function($) {
 	function getParagraphs(title, paragraphCount, callback) {
+		if (typeof paragraphCount === 'function') {
+			callback = paragraphCount;
+			paragraphCount = 100;
+		}
 		$.ajax({
 			url: '/wiki/' + title,
 			type: 'GET',
