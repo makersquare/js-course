@@ -1,9 +1,29 @@
-<script src="/js/vendor/jquery-2.1.1.min.js"></script>
 <div id="container">
 </div>
+<div class="templates">
+    <script type="text/template" id="markov-view">
+        <div class="markov-view">
+            <label>Input</label>
+            <textarea class="input-textarea"></textarea>
+            <label>Output</label>
+            <textarea class="output-textarea"></textarea>
+            <button class="modify-button">Modify!</button>
+            <button class="random-button">Random string!</button>
+            <button class="markov-button">Markovify!</button>
+        </div>
+    </script>
+</div>
+<script src="/js/vendor/jquery-2.1.1.min.js"></script>
+<script src="/js/vendor/underscore.min.js"></script>
 <script src="/js/wiki.js"></script>
+<script src="/js/upper.js"></script>
+<script src="/js/lower.js"></script>
+<script src="/js/upperLower.js"></script>
+<script src="/js/modifyString.js"></script>
+<script src="/js/randomString.js"></script>
 <script src="/js/pagetext.js"></script>
 <script src="/js/markov.js"></script>
+<script src="/js/markovView.js"></script>
 <script src="/js/main.js"></script>
 <script>
   /**
@@ -35,9 +55,9 @@
     modules consistent enough in usage that you can swap out UpperLower for your
     ModifyString module without having to change the code in your MarkovView module.
 
-    4. Create a module that generates a random string. It's entirely up to you how
-    to implement this randomly, but make sure you have spaces in your string.
-    Once complete, integrate it into your MarkovView module as a dependency
+    4. Create a RandomString module that generates a random string. It's entirely up
+    to you how to implement this randomly, but make sure you have spaces in your
+    string. Once complete, integrate it into your MarkovView module as a dependency
     and add a "random" button to the first module. When clicked, that button
     should call this module's text generation function and put text into the
     first text area of your first module.
