@@ -24,7 +24,7 @@ get '/api/jokes' do
   json @jokes
 end
 
-post '/api/joke' do
+post '/api/jokes' do
   puts params
   joke_info = params["joke"]
   joke = Jokes.orm.add_joke(
@@ -34,7 +34,7 @@ post '/api/joke' do
   json joke.to_json
 end
 
-delete '/api/joke/:id' do
+delete '/api/jokes/:id' do
   Jokes.orm.delete_joke(params[:id].to_i)
   json({ id: params[:id] })
 end
