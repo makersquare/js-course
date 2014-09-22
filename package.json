@@ -1,0 +1,30 @@
+{
+  "name": "sockets-chat",
+  "version": "0.0.0",
+  "description": "This is the completed socket chat app through a senior lecture on sockets. You can launch the server by running `node server.js`.",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "express": "^4.4.3",
+    "socket.io": "^1.0.4"
+  },
+  "devDependencies": {
+    "ejs": "^1.0.0",
+    "express": "^4.9.4",
+    "socket.io": "^1.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makersquare/js-course.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/makersquare/js-course/issues"
+  },
+  "homepage": "https://github.com/makersquare/js-course"
+}
