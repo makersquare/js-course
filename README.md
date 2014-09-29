@@ -15,6 +15,8 @@ bundle exec rake db:migrate
 rails s
 ```
 
+Additionally, feel free to run `bundle exec rake db:seed` to populate it with 2 mock quizzes.
+
 You should now have the server running and accessible at http://localhost:3000/. You can make AJAX requests to the API freely.
 
 Note that this API has NO users and NO authentication! It's not fit to be used on a live, production server!
