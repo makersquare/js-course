@@ -3,6 +3,52 @@
 <div class="quiz-app">
 </div>
 
+<script type="text/template" class="quiz-template">
+  <div class='quiz-view'>
+    <h2><%%= title %></h2>
+    <div class='question-container'></div>
+  </div>
+</script>
+
+<script type="text/template" class="quiz-list-template">
+  <ul>
+    <%% for (var i in quizzes) { %>
+      <li data-id='<%%= quizzes[i].id %>'><%%= quizzes[i].title %></li>
+    <%% } %>
+  </ul>
+</script>
+
+<script type="text/templates" class="multiple-question-template">
+  <div class='question-view'>
+    <h5><%%= question %></h5>
+    <%% for (var i in choices) { %>
+      <input id='choice-<%%= choices[i] %>' type='radio' value='<%%= choices[i] %>' name='multiple'><%%= choices[i] %>
+      <br>
+      <label for='choice-<%%= choices[i] %>'>
+    <%% } %>
+    <input type='submit'>
+  </div>
+</script>
+
+<script type="text/template" class="boolean-question-template">
+  <div class='question-view'>
+    <h5><%%= question %></h5>
+    <input id='boolean-true' type='radio' value='false' name='boolean'>
+    <label for='boolean-true'>true</label>
+    <input id='boolean-false' type='radio' value='true' name='boolean'>
+    <label for='boolean-false'>false</label>
+    <input type='submit'>
+  </div>
+</script>
+
+<script type="text/template" class="blank-question-template">
+  <div class='question-view'>
+    <h5><%%= question %></h5>
+    <input type='text'>
+    <input type='submit'>
+  </div>
+</script>
+
 <!-- Entry point -->
 <script type="text/javascript">
   var $quizView = $('.quiz-app');

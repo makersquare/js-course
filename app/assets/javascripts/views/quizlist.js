@@ -1,29 +1,27 @@
-function QuizListView(quizzes, container) {
-	var template = [
-		"<ul>",
-			"<% for (var i in quizzes) { %>",
-				"<li data-id='<%= quizzes[i].id %>'><%= quizzes[i].title %></li>",
-			"<% } %>",
-		"</ul>"
-	].join('')
+var QuizListView = function(quizzes, container) {
+	var template = $('.quiz-list-template').html();
 
 	var uncompiledTemplate = _.template(template);
+
 	var compiledTemplate = uncompiledTemplate({
 		quizzes: quizzes
 	});
+
 	this.$el = $(compiledTemplate);
 
-	// Thin event binding
 	this.$el.find('li').on('click', function() {
-		Application.presenter.showQuiz($(this).attr('data-id'));
-	});
+		Application.presenter.showQuiz($(this).data('id'));
+	})
 
 	$(container).append(this.$el);
 
-	this.hide = function() {
-		this.$el.hide();
-	};
-	this.show = function() {
-		this.$el.show();
-	}
-}
+	return this;
+};
+
+window.QuizListView.prototype.hide = function() {
+	this.$el.hide();
+};
+
+window.QuizListView.prototype.show = function() {
+	this.$el.show();
+};
