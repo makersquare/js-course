@@ -1,5 +1,8 @@
+// Here I return an object to the Quizzy global variable that has one method,
+// start(). When called, this will generate models and list out all quizzes.
 var Quizzy = (function() {
-	// quizData passed in from the outside
+	// Declaring this variable so you know it exists, but
+	// quizData passed in from the outside.
 	var quizData;
 	// Index of the question we're on
 	var currentQuestion = 0;

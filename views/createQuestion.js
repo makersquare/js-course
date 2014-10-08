@@ -1,6 +1,7 @@
 (function(app) {
 	app.Views = app.Views || {};
 
+	// Assign View to collected "Views" object on my application.
 	app.Views.CreateQuestionView = function($container, quizId) {
 		var $view = $(app.Util.buildTemplate('template-create-question', {
 			edit: false

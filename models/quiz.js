@@ -1,3 +1,8 @@
+// NOTE: In some classes I separate out all of the individual localStorage
+//       values into a whole bunch of different key/value pairs as opposed
+//       to storing whole quizzes (or all the quizzes) in single key/value
+//       pairs. I like separating things out more because it makes it a little
+//       bit easier to update question details.
 (function(app) {
 	app.Models = app.Models || {};
 	// This is because I am lazy and typing is boring. wondering why the .bind()?

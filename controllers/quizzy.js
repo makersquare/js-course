@@ -16,12 +16,15 @@
 			}
 			return qids;
 		},
+		// Here I'm cheating with underscore to find quizzes in my
+		// quizModels where the Id matches what I need.
 		getQuizById: function(id) {
 			var quiz = _.findWhere(app.quizModels, {
 				id: id
 			});
 			return quiz;
 		},
+		// Same deal but for questions with quizzes.
 		getQuestionById: function(quizId, questionId) {
 			var quiz = _.findWhere(app.quizModels, {
 				id: quizId
@@ -42,6 +45,7 @@
 			}
 			app.Controller.nextQuestion(questionModel.quiz);
 		},
+		// Tell a specific quizModel to switch to the next question
 		nextQuestion: function(quizModel) {
 			quizModel.questionModels[quizModel.questionIndex].view.hide();
 			quizModel.questionIndex = quizModel.questionIndex + 1;
@@ -52,6 +56,7 @@
 				app.Controller.showScore(quizModel);
 			}
 		},
+		// Show all the quizzes
 		showQuizListing: function() {
 			// Clear out views
 			app.$quizzyContainer.empty();
@@ -61,14 +66,17 @@
 				new app.Views.ListingView(app.$quizzyContainer, app.quizModels)
 			);
 		},
+		// Show the quiz creation view
 		showCreateQuiz: function() {
 			app.$quizzyContainer.empty();
 			new app.Views.CreateQuizView(app.$quizzyContainer);
 		},
+		// Show the question creation view
 		showCreateQuestion: function(quizId) {
 			app.$quizzyContainer.empty();
 			new app.Views.CreateQuestionView(app.$quizzyContainer, quizId);
 		},
+		// Show the quiz editing view
 		showEditQuiz: function(id) {
 			app.$quizzyContainer.empty();
 
@@ -76,6 +84,7 @@
 			var quiz = app.Controller.getQuizById(id);
 			new app.Views.EditQuizView(app.$quizzyContainer, quiz);
 		},
+		// Show the question editing view
 		showEditQuestion: function(quizId, questionId) {
 			app.$quizzyContainer.empty();
 
