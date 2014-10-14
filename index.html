@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Task Manager SPA</title>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="underscore-min.js" type="text/javascript"></script>
+  <script src="app.js" type="text/javascript"></script>
+  <script src="./Models/taskmodel.js" type="text/javascript"></script>
+  <script src="./Views/taskview.js" type="text/javascript"></script>
+  <script src="./Views/tasklistview.js" type="text/javascript"></script>
+  <script src="./Controllers/taskcontroller.js" type="text/javascript"></script>
+</head>
+<body>
+  <script type="text/template" class="task-template">
+    <h1><%= task.name %></h1>
+    <ul>
+      <li>Description: <%= task.desc %></li>
+      <li>Complete: <%= task.complete %></li>
+    </ul>
+  </script>
+  <div class="task"></div>
+  <div class="task-list"></div>
+</body>
+</html>
