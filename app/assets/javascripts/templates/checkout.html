@@ -1,0 +1,6 @@
+<h2>Your cart:</h2>
+<input type="text" ng-model="person.name"><br>
+<div ng-repeat="itemBought in items">
+{{itemBought.count}} x {{itemBought.item.name}}
+</div>
+<button ng-click="buyEverything()">Buy all</button>

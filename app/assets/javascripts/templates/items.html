@@ -1,3 +1,14 @@
+<button ng-click="goToCheckout()">Checkout</button>
 <div ng-repeat="item in items">
-  {{item.name}}
+  <button ng-click="buyItem(item)">Click to add 1 to shopping list</button>
+  <h3>{{item.name}}</h3>
+  <br>
+  <p>{{item.description}}</p>
+  <br>
+  <strong>${{item.price}} each</strong>
+  <br>
+  <strong>{{item.quantity}} remaining</strong>
+  <img ng-src="{{item.url}}">
+  <br>
+  <hr>
 </div>
