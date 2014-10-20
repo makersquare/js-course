@@ -1,0 +1,16 @@
+var app = angular.module("AmazonApp", ["ngRoute", "ngResource"]);
+
+app.config(function($routeProvider) {
+  $routeProvider
+    .when("/items", {
+      templateUrl: "<%= asset_path('assets/templates/items.html') %>",
+      controller: "ItemsController"
+    })
+    .when("/checkout", {
+      templateUrl: "<%= asset_path('assets/templates/checkout.html') %>",
+      controller: "CheckoutController"
+    }).
+    otherwise({
+      redirectTo: "/items"
+    });
+})
