@@ -1,5 +1,5 @@
 <div ng-controller="TaskController">
-  <h1>My Age: {{myAge}}</h1>
-  <input type="number" ng-model="myAge">
-  <button ng-click="incrementAge()">Birthday!</button>
+  <div ng-repeat="item in items">
+    <h1>{{item.name}}</h1>
+  </div>
 </div>

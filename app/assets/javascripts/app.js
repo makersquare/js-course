@@ -9,10 +9,9 @@ app.controller('TodoController', ['$scope', '$location',
   }
 ]);
 
-app.controller('TaskController', ['$scope', '$resource',
-    function($scope, $resource) {
-      var task = $resource('/tasks/:id', {id: '@id'});
-      task.query();
-      console.log(task);
-    }
+app.controller('TaskController', ['$resource', '$scope',
+  function( $resource, $scope) {
+    var Item = $resource('/items/:id', {id: '@id'});
+    $scope.items = Item.query();
+  }
 ]);
