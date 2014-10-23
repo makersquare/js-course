@@ -1,1 +1,5 @@
-<h1>Look at app/views/items/home.html.erb</h1>
+<div ng-controller="TaskController">
+  <h1>My Age: {{myAge}}</h1>
+  <input type="number" ng-model="myAge">
+  <button ng-click="incrementAge()">Birthday!</button>
+</div>
