@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 
 gem 'angularjs-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -38,4 +39,4 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem 'rails_12factor'
