@@ -20,6 +20,6 @@ test:
   <<: *default
   database: db/test
 
-production:
-  <<: *default
-  database: db/production
+# production:
+#   <<: *default
+#   database: db/production
