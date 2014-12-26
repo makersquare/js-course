@@ -1,0 +1,47 @@
+<html>
+<head>
+  <title>Robin Starter</title>
+  <style type="text/css">
+    #templates { display: none; }
+    #store .item {
+      background: #ddd;
+      padding: 1px 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- $('input[name="price"]') -->
+<!-- HTML -->
+<form>
+  <label for="food"></label>
+  <input type="text" name="name" value="food" class="food">
+  <label for="price"></label>
+  <input type="text" name="price" value="price" class="price">
+  <input type="submit" value="Submit">
+</form>
+<!-- params = { name: submittedName} -->
+<div id="store">
+
+</div>
+
+<div id="templates">
+  <!-- TEMPLATE HERE  even though it's a script tag it's not javaScript, give class so can access via jQuery-->
+  <script class="item" type="text/template">
+    <div class="item">
+      <p>{{name}} - ${{price}}</p>
+    </div>
+  </script>
+
+</div>
+
+
+<script src="vendor/js/jquery-1.10.2.min.js"></script>
+<script src="vendor/js/robin.js"></script>
+<script src="js/main.js"></script>
+
+
+
+</body>
+</html>
