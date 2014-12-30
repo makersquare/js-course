@@ -12,5 +12,13 @@ var resetBoard = function () {
     ['red', ' X ', 'red', ' X ', 'red', ' X ', 'red', ' X ']
   ];
 
-  currentPlayer = 'wht'
+  currentPlayer = 'wht';
+
+  $(document).trigger('boardChange');
+};
+
+var selectSquare = function(row, col) {
+  if (board[row][col] === ' X ') {
+    $(document).trigger('error', "You selected an empty spot.");
+  }
 };

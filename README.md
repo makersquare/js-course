@@ -35,24 +35,60 @@ At a minimum you will be able to do the following:
 * Have a user interface for playing this on the console
 * Have a user interface for playing this on an HTML page
 
-## The Checkers Engine
+## The Checkers Engine - Overview
 
 If you look at the last two tasks, you'll have to implement 2 separate UIs for this game. Because of this, we'll have to decouple the logic for the game from the UI of the game.
 
-The first part of this is creating the data structures and functions needed to simulate movements. Create a file called `checkers.js` and include it in your index.html file.
+The first part of this is creating the data structures and functions needed to simulate movements. This will be the `src/checkers.js` file.
 
-Implement the following functions:
+This file has the variables `board` and `currentPlayer` and a couple of functions as well. `board` represents the current state of the checkers board. It is a 2D array that you access with the row and column number: `board[1][3]`. This represents row 2 and column 4.
 
-* **resetBoard()** - this function should set the `board` variable equal to an array of arrays that represents the board. It will also set the `currentPlayer`
-* **attemptMove(row1, col1, row2, col2)** - This will take in a pair of coordinates. The first one represents the starting position of a piece you want to move, and the second one represents the position that you want to move it to. This function will check if the move is valid. If it is, it will execute it; otherwise, it will error out (we'll explain how later).
-* **makeMove(row1, col1, row2, col2)** - This will actually execute the movement of the piece. (Helper function called by attemptMove)
-* **removePiece(row, col)** - This function will remove the piece at the given coordinate. (Helper function called by attemptMove)
+Each spot can either have the value ' X ' to represent and empty spot, 'wht' to represent player1 or `red` to represent player2.
 
-For now, these functions will change the `board` variable to reflect movement. It has no way to actually show an error just yet, so do nothing when there's an error.
+`currentPlayer` represents the player whose turn it is right now.
+
+The function `resetBoard`, sets up the board and the currentPlayer for a brand new game to be played.
+
+`selectSquare` is the function that executes when you're trying to play the game. This is the interesting function that you will have to build out. If you're imagining a web application that has a checkers board, in order to make a move, you have to click on two squares. The first one is to select the piece that you want to move, the second one is the square that you want to move the piece to. `selectSquare` represents each one of those clicks. Here is the spec:
+
+### Select Square Spec
+
+First Move:
+
+* If on your first click, you select an empty spot instead of a checkers piece, you should trigger an error. You once again listen for the first move. **This part is done for you as an example.**
+* If on your first click, you select a piece of the wrong color, you should trigger an error. You once again listen for the first move.
+* If on your first click, you select your own piece, store the information and start listening for the second move.
+
+Second Move:
+
+* If you click on another piece, trigger an error. This is equivalent to you trying to move on top of another piece which is illegal. Listen for the first move again.
+* If you click on an empty spot that's not a legal move, trigger an error and listen for the first move again.
+* If you click on a proper spot, update the board and trigger a "boardChange" event. Listen for the first move again.
+* If upon clicking on a proper spot, you also take an opponent's piece, update the board, trigger a "boardChange" event, and a "stolenPiece" event.
 
 ---
 
 ## Tell the UI that something has changed
+
+We're first going to consider how we can play this game on the console. In order to do this, we need to define how the inputs and outputs will look.
+
+Inputs - The only inputs we need from the user is from them selecting a square. Our users will be referring to particular squares by a letter for the column and a number for the row. Create a function called `makeMove` that takes an input of a row letter and a column number and calls `selectSquare` with the respective index. Example:
+
+```javascript
+var makeMove = function(letter, number) {
+  // call selectSquare
+  // if makeMove("c", 6); is called, you should call
+  // selectSquare(2, 5);
+  // This is because "c" is the 3rd letter which is index 2,
+  // and 6 would be index 5.
+};
+```
+
+Outputs - To show the user any output, we're going to be using `console.log` to print out statements.
+
+To get the outputs working, we first have to know when to print certain statements. For example, we can print the state of the board, but **when** do we print it out? When the file loads? When the game starts?
+
+**You actually print the state of the board whenever the board changes.** We've already built out the `displayBoard` method, execute this function whenever the `boardChange` event occurs.
 
 In order to tell the UI (a js file that doesn't exist yet) that it needs to update, we're going to use events. For now you'll be triggering these events on the `$(document)` element. Here are the events you need to trigger:
 
@@ -62,63 +98,11 @@ In order to tell the UI (a js file that doesn't exist yet) that it needs to upda
 
 ---
 
-## Console UI
-
-The first UI we'll work with is going to deal with the prompt and our good ol' `console.log` function.
-
-### Display the board
-
-Use the following JS code to display the board:
-
-```javascript
-var numToChar = ["a", "b", "c", "d", "e", "f", "g", "h"];
-var charToNum = {
-  a: 0,
-  b: 1,
-  c: 2,
-  d: 3,
-  e: 4,
-  f: 5,
-  g: 6,
-  h: 7
-};
-
-var displayBoard = function () {
-  var column = [0, 1, 2, 3, 4, 5, 6, 7];
-  console.log("  | " + column.join("   "));
-  console.log("-----------------------------------");
-  for (var i = 0; i < board.length; i++) {
-    console.log(numToChar[i] + " |" + board[i].join(" "));
-  }
-};
-```
-
-Try displaying the board in the console. call `resetBoard` and then display the board again.
-
-### Get the move
-
-Create a function called `getMove` that will prompt the user for a move. Your goal is to parse the user input into coordinate positions that you could throw into the `board` array.
-
-I personally chose to return an object with the following properties:
-
-* startRow
-* startCol
-* endRow
-* endCol
-
-I also chose to return `{quit: true}` if the user typed anything that started with q. This would let me know the user is done playing the game.
-
-### Play the game
-
-Create a function called `play`. This function controls the whole game. It should start off by resetting the board. It should then get the user's move and try making the move using `attemptMove`.
-
-Notice, you should not do anything that requires you to display anything to the screen.
-
 ### Show me what you got!
 
 In order to display the board, use an event handler for `boardChange`.
 
-Create an event handler to display an error to the user.
+Create an event handler to display an error to the user whenever the `error` event occurs.
 
 Create an event handler to taunt a user when a piece gets taken.
 
@@ -128,9 +112,32 @@ Create an event handle to display how many turns have occurred.
 
 ## Let's go to the Web
 
-Things get tricky here because you're no longer dealing with inputs/outputs that you have 100% control of. With `prompt` you know that that when the user types in an input, your function will continue with the next line; however, you can't say the same for when a person must click on a square on the board.
+We'll tackle this, just like we tackled the console_driver. This time you'll have to create everything from scratch. Start by considering the inputs and outputs:
 
-### Display the board
+Inputs: On the web, the inputs are clicks on the board.
+
+Outputs: The outputs are the HTML/CSS on the board which visually show the user what has changed.
+
+Create a file called `jquery_driver.js` and include it in your `index.html`.
+
+### Inputs
+
+Use a click listener to listen to when a user clicks on the board. Determine the row and column that the user has clicked on, and call the `selectSquare` method.
+
+<aside>
+  Figuring out the row and column of the selected square is actually quite difficult. You will have to use a combination of the following tools:
+
+  - `$(e.currentTarget)`: e is the events in the click listener, and currentTarget represents the HTML element selected.
+  - The jQuery method `.parent()` and `.children()`. Use the combination of the two.
+  - The method `indexOf` for arrays
+
+  Again, this is very difficult. If you're stuck on this for too long, contact a fellow to help.
+
+</aside>
+
+### Ouptuts
+
+This is similar to the console driver, you will still need to have the same event handlers that you had beforehand, but this time you'll display things on the HTML board.
 
 To display the board, you will want to use a combination of iteration, string manipulation, and jQuery to show the right pieces.
 
@@ -144,31 +151,9 @@ For each square, if there is no piece, you should empty the span.
 
 If there is a red piece, you should give it the classes "red" and "piece". If there is a white piece, you should give it the classes "white" and "piece".
 
-### Creating a solid move
+#### Display errors
 
-In order to create a move, a person has to click on 2 square; however, jQuery allows you to listen to 1 event at a time.
-
-You'll have to
-
-* Listen to the first click
-* Store the information about that click
-* Wait for the second click
-* Attempt making a move
-* Clear previously saved iformation
-
-You will click a single event handler to listen for clicks that will be able to tell whether it's on the first or second click.
-
-### Display the board
-
-Create a click handler for when the board changes.
-
-### Display errors
-
-When the checkers engine triggers the `invalidMove` event, display it on the page. You'll need an event handler and will likely need to edit the HTML, too.
-
-### Gathering moves from clicks
-
-Once the document has loaded, create the click handler for each square on the board.
+When the checkers engine triggers the `error` event, display it on the page. You'll need an event handler and will likely need to edit the HTML, too.
 
 ### Start the game
 
