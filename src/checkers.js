@@ -19,6 +19,6 @@ var resetBoard = function () {
 
 var selectSquare = function(row, col) {
   if (board[row][col] === ' X ') {
-    $(document).trigger('error', "You selected an empty spot.");
+    $(document).trigger('invalidMove', "You selected an empty spot.");
   }
 };

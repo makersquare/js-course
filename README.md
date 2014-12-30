@@ -43,26 +43,26 @@ The first part of this is creating the data structures and functions needed to s
 
 This file has the variables `board` and `currentPlayer` and a couple of functions as well. `board` represents the current state of the checkers board. It is a 2D array that you access with the row and column number: `board[1][3]`. This represents row 2 and column 4.
 
-Each spot can either have the value ' X ' to represent and empty spot, 'wht' to represent player1 or `red` to represent player2.
+Each spot can either have the value `' X '` to represent and empty spot, `'wht'` to represent player1 or `'red'` to represent player2.
 
 `currentPlayer` represents the player whose turn it is right now.
 
 The function `resetBoard`, sets up the board and the currentPlayer for a brand new game to be played.
 
-`selectSquare` is the function that executes when you're trying to play the game. This is the interesting function that you will have to build out. If you're imagining a web application that has a checkers board, in order to make a move, you have to click on two squares. The first one is to select the piece that you want to move, the second one is the square that you want to move the piece to. `selectSquare` represents each one of those clicks. Here is the spec:
+`selectSquare` is the function that executes when you're trying to play the game. This is the interesting function that you will have to build out. If you're imagining a web application that has a checkers board, you have to click on two squares in order to make a move. The first one is to select the piece that you want to move, the second one is the square that you want to move the piece to. `selectSquare` represents each one of those clicks. Here is the spec:
 
 ### Select Square Spec
 
 First Move:
 
-* If on your first click, you select an empty spot instead of a checkers piece, you should trigger an error. You once again listen for the first move. **This part is done for you as an example.**
-* If on your first click, you select a piece of the wrong color, you should trigger an error. You once again listen for the first move.
+* If on your first click, you select an empty spot instead of a checkers piece, you should trigger an `invalidMove` event. You once again listen for the first move. **This part is done for you as an example.**
+* If on your first click, you select a piece of the wrong color, you should trigger an invalidMove event. You once again listen for the first move.
 * If on your first click, you select your own piece, store the information and start listening for the second move.
 
 Second Move:
 
-* If you click on another piece, trigger an error. This is equivalent to you trying to move on top of another piece which is illegal. Listen for the first move again.
-* If you click on an empty spot that's not a legal move, trigger an error and listen for the first move again.
+* If you click on another piece, trigger an invalidMove event. This is equivalent to you trying to move on top of another piece which is illegal. Listen for the first move again.
+* If you click on an empty spot that's not a legal move, trigger an invalidMove event and listen for the first move again.
 * If you click on a proper spot, update the board and trigger a "boardChange" event. Listen for the first move again.
 * If upon clicking on a proper spot, you also take an opponent's piece, update the board, trigger a "boardChange" event, and a "stolenPiece" event.
 
@@ -77,10 +77,8 @@ Inputs - The only inputs we need from the user is from them selecting a square. 
 ```javascript
 var makeMove = function(letter, number) {
   // call selectSquare
-  // if makeMove("c", 6); is called, you should call
-  // selectSquare(2, 5);
-  // This is because "c" is the 3rd letter which is index 2,
-  // and 6 would be index 5.
+  // if makeMove("c", 6); is called, you should call selectSquare(2, 5);
+  // This is because "c" is the 3rd letter which is index 2, and 6 would be index 5.
 };
 ```
 
@@ -94,7 +92,7 @@ In order to tell the UI (a js file that doesn't exist yet) that it needs to upda
 
 * When the board changes trigger a `boardChange` event and send the board array
 * When a piece is taken trigger a `pieceTaken` event and send the currentPlayer, the enemy, the row and column of the piece.
-* When someone tries to make an invalid move, trigger an `invalidMove` event and send a message with the error.
+* When someone tries to make an invalid move, trigger an `invalidMove` event and print a message with the error.
 
 ---
 
@@ -102,7 +100,7 @@ In order to tell the UI (a js file that doesn't exist yet) that it needs to upda
 
 In order to display the board, use an event handler for `boardChange`.
 
-Create an event handler to display an error to the user whenever the `error` event occurs.
+Create an event handler to display an error to the user whenever the `invalidMove` event occurs.
 
 Create an event handler to taunt a user when a piece gets taken.
 
@@ -153,7 +151,7 @@ If there is a red piece, you should give it the classes "red" and "piece". If th
 
 #### Display errors
 
-When the checkers engine triggers the `error` event, display it on the page. You'll need an event handler and will likely need to edit the HTML, too.
+When the checkers engine triggers the `invalidMove` event, display it on the page. You'll need an event handler and will likely need to edit the HTML, too.
 
 ### Start the game
 
