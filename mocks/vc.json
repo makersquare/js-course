@@ -1,0 +1,14 @@
+[
+  {
+    "s_id" : 1,
+    "name" : "Mr. Corleone"
+  },
+  {
+    "s_id" : 2,
+    "name" : "Giovanni Falcone"
+  },
+  {
+    "s_id" : 3,
+    "name" : "Paolo Borsellino"
+  }
+]
