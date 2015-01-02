@@ -147,10 +147,48 @@
         };
       };
 
-      console.log('Suspect hash',suspectsHash);
+      // creating last array of promises
+
+      var arrayOfPromises = [];
+
+      for(var i in suspectsHash){
+        for(var j in suspectsHash[i].evidences){
+          arrayOfPromises.push(new Promise(function(resolve,reject){
+
+            var requestData = {
+              caseId : caseId,
+              rankInput : {
+                accuracy : suspectsHash[i].evidences[j].accuracy,
+                weight : suspectsHash[i].evidences[j].weight
+              }
+            };
+
+            $.ajax({
+              url : '/FBI/API/calculateScore',
+              data : requestData,
+              type : 'POST',
+              dataType : 'json',
+              success : function (data){
+                resolve(data);
+              },
+              error : function(err){
+                reject(err);
+              }
+            });
+          }));
+        };
+      };
+
+      return Promise.all(arrayOfPromises);
 
     },function(err){
       console.log('second array of promises fails',err);
+    }).
+
+    then(function(responses){
+      console.log('Get punctuations',responses);
+    },function(err){
+      console.log('third array of promises fails',err);
     });
 
     result.textContent = 'he or she still being unknown :('
