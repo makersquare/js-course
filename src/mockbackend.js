@@ -108,7 +108,7 @@
         }
         return {
           responseTime : 500,
-          responseText : "Invalid request",
+          responseText : "Invalid request, case details",
           status : 401
         };
 
@@ -124,7 +124,7 @@
         }
         return {
           responseTime : 500,
-          responseText : "Invalid request",
+          responseText : "Invalid request, interview",
           status : 401
         };
 
@@ -140,7 +140,7 @@
         }
         return {
           responseTime : 500,
-          responseText : "Invalid request",
+          responseText : "Invalid request, item laboratory",
           status : 401
         };
 
@@ -156,7 +156,7 @@
         }
         return {
           responseTime : 500,
-          responseText : "Invalid request",
+          responseText : "Invalid request, media laboratory",
           status : 401
         };
 
@@ -172,7 +172,7 @@
         }
         return {
           responseTime : 500,
-          responseText : "Invalid request",
+          responseText : "Invalid request, medical analysis",
           status : 401
         };
 
@@ -206,7 +206,7 @@
         }
         return {
           responseTime : 500,
-          responseText : "Invalid request",
+          responseText : "Invalid request, calculator",
           status : 401
         };
 
