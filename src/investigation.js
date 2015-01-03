@@ -186,12 +186,41 @@
     }).
 
     then(function(responses){
-      console.log('Get punctuations',responses);
+
+      var responseIterator = 0;
+
+      for(var i in suspectsHash){
+        for(var j in suspectsHash[i].evidences){
+          if(suspectsHash[i].punctuation){
+            suspectsHash[i].punctuation += responses[responseIterator].result;
+          } else {
+            suspectsHash[i].punctuation = responses[responseIterator].result;
+          }
+          responseIterator++;
+        };
+      };
+
+      // getting the suspects with highest punctuation
+
+      var highestScoreOwner = undefined;
+
+      for(var i in suspectsHash){
+        if(highestScoreOwner){
+          if( suspectsHash[i].punctuation > suspectsHash[highestScoreOwner].punctuation){
+            highestScoreOwner = i;
+          }
+        } else {
+        highestScoreOwner = i;
+        }
+      };
+
+      console.log(suspectsHash);
+      // writing result
+      result.textContent = suspectsHash[highestScoreOwner].name;
+
     },function(err){
       console.log('third array of promises fails',err);
     });
-
-    result.textContent = 'he or she still being unknown :('
 
   };
 
