@@ -41,7 +41,7 @@ $(document).ready(function (){
 		else {
 			$('.infobox').text("Current player: Red")
 		}
-		$('.infobox').append('<br>turns taken: ', turns)
+		$('.infobox').append('<br>Turns taken: ', turns)
 	});
 
 	$(document).on('invalidMove',function(e, error){
