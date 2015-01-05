@@ -36,7 +36,6 @@ var getMove = function (){
 
 var play = function() {
   resetBoard();
-  displayBoard();
   var gaming = true;
   while (gaming === true){
     var move = getMove();

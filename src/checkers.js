@@ -83,7 +83,7 @@ var makeMove = function (row1, col1, row2, col2) {
   var piece = board[charToNum[row1]][col1]
   board[charToNum[row2]][col2] = piece
   board[charToNum[row1]][col1] = ' X '
-  displayBoard();
+  $(document).trigger('boardChange')
 };
 
 var removePiece = function (row, col){
