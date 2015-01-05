@@ -18,3 +18,33 @@ var displayBoard = function () {
     console.log(numToChar[i] + " |" + board[i].join(" "));
   }
 };
+
+var getMove = function (){
+  var move = prompt("Enter the row and colum numbers of your current piece position and the new position:")
+  if (move[0] === "q"){
+    return "q"
+  }
+  else{
+  var bits = move.split(",")
+  var coords = {"r1": bits[0],
+                "c1": bits[1],
+                "r2": bits[2],
+                "c2": bits[3]};
+  return coords;
+  }
+};
+
+var play = function() {
+  resetBoard();
+  var gaming = true;
+  while (gaming === true){
+    var move = getMove();
+    if (move === "q"){    
+      gaming = false;
+    }
+    else{
+    console.log("got coords:", move);
+    attemptMove(move["r1"],move["c1"],move["r2"],move["c2"]);
+    }
+  }  
+};

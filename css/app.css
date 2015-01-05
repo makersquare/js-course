@@ -22,10 +22,25 @@
   background-color: white;
 }
 
+.clicked {
+  background-color: #CCCCCC;
+}
+
 .piece {
   margin: 5px;
   width: 40px;
   height: 40px;
   display: inline-block;
   border-radius: 50%;
+}
+
+.infobox {
+  font-family: Helvetica;
+  float: right;
+  margin-right: 820px;
+  margin-top: -350px;
+  background-color: #CCFFCC;
+  font-size: 24px;
+  width: 300px;
+  height: 200px;
 }
