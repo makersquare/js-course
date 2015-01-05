@@ -10,37 +10,51 @@ $(document).ready(function (){
 		var row = $(this).parent('span').attr("class");
 		var rowx = row.slice(-1);
 		selectSquare(rowx,colx);
+		// $(this).addClass('clicked');
 	});
+
 
 	$(document).on('boardChange', function(){
 		displayBoard(); //just for console
 		for (var i = 0; i < board.length; i++) { //iterate rows
 		 for (var j = 0; j < 8; j++){ //iterate cols
-		 	var row = ".row-" + numToChar[i];
+			var row = ".row-" + numToChar[i];
 		 	var col = ".col-" + String(j);
-		 	if (board[i][j] === " X "){
-		 	  $(row).find(col).empty();
-		 	}
-		 	else if (board[i][j] === "wht"){
-		 	  $(row).find(col).empty();
+		 	$(row).find(col).empty();
+		 	$(row).find(col).removeClass("clicked");
+		 	// if (board[i][j] === " X "){		 	
+		 	// }
+		 	if (board[i][j] === "wht"){		 	 
 		 	  var div = $('<div>').addClass('white piece');
 		 	  $(row).find(col).append(div);
 		 	}
-		 	else if (board[i][j] === "red"){
-		 	  $(row).find(col).empty();
+		 	else if (board[i][j] === "red"){		 
 		 	  var div = $('<div>').addClass('red piece');
 		 	  $(row).find(col).append(div);
 		 	}
 		 }//end cols
 		}//end rows
+		$('.infobox').empty();
+		if (currentPlayer === 'wht'){
+			$('.infobox').text("Current player: White")
+		}
+		else {
+			$('.infobox').text("Current player: Red")
+		}
+		$('.infobox').append('<br>turns taken: ', turns)
 	});
 
-	$(document).on('invalidMove',function(error){
+	$(document).on('invalidMove',function(e, error){
 		alert(error);
 	})
 
-	$(document).on('pieceTaken', function(player, enemy, row, col){
-		alert("Haha, you lost a piece!")
+	$(document).on('pieceTaken', function(e, player, row, col){
+		if (player === 'wht'){
+		alert("White captured a red piece!")
+		}
+		else {
+		alert("Red captured a white piece!")
+		}
 	})
 
 });

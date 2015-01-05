@@ -1,5 +1,6 @@
-var board, currentPlayer;
-var clicks = []
+var board, currentPlayer, turns;
+var clicks = [];
+
 
 var resetBoard = function () {
   board = [
@@ -14,7 +15,7 @@ var resetBoard = function () {
   ];
 
   currentPlayer = 'wht';
-
+  turns = 0;
   $(document).trigger('boardChange');
 };
 
@@ -25,7 +26,6 @@ var selectSquare = function(row, col) {
   else if ((board[charToNum[row]][col] === currentPlayer) && clicks.length === 0){
     clicks.push(row);
     clicks.push(col);
-    console.log(clicks);
   }
   else if ((board[charToNum[row]][col] != currentPlayer) && clicks.length === 2){
     clicks.push(row);
@@ -95,14 +95,16 @@ var makeMove = function (row1, col1, row2, col2) {
   var piece = board[charToNum[row1]][col1];
   board[charToNum[row2]][col2] = piece;
   board[charToNum[row1]][col1] = ' X ';
-  $(document).trigger('boardChange');
-  clicks = [];
   if (currentPlayer === 'wht'){
-    currentPlayer = 'red'
+    currentPlayer = 'red';
   }
   else if (currentPlayer === 'red'){
-    currentPlayer = 'wht'
+    currentPlayer = 'wht';
   }
+  turns++;
+  $(document).trigger('boardChange');
+  clicks = [];
+
 };
 
 var removePiece = function (row, col){
