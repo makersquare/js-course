@@ -1,6 +1,6 @@
 class ScoresController < AJAXController
-  before_action :set_score, only: [:show, :edit, :update, :destroy]
   before_action :set_quiz
+  before_action :set_score, only: [:show, :edit, :update, :destroy]
 
   # GET /scores
   # GET /scores.json
