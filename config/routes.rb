@@ -11,8 +11,8 @@ QuizzyNet::Application.routes.draw do
     resources :questions do
       get "check" => "questions#check_answer"
     end
+    resources :scores
   end
 
-  resources :scores
   root "home#index"
 end
