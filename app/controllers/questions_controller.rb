@@ -1,6 +1,6 @@
 class QuestionsController < AJAXController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_quiz
+  before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /questions
   # GET /questions.json
