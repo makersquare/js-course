@@ -1,0 +1,34 @@
+{
+  "id" : "case-01",
+  "caseName":"All the beer supplies have been stolen before they got to Austin",
+  "evidences":[
+    {
+      "evidenceType":"witness",
+      "evidenceDescription":"Truck drivers declarations."
+    },
+    {
+      "evidenceType":"items",
+      "evidenceDescription":"flat tires on all the trucks."
+    },
+    {
+      "evidenceType":"injuries",
+      "evidenceDescription":"Some truck drivers got a hit on the head."
+    },
+    {
+      "evidenceType":"media",
+      "evidenceDescription":"Records from truck's security cameras."
+    },
+    {
+      "evidenceType":"items",
+      "evidenceDescription":"Shoe prints on the ground."
+    },
+    {
+      "evidenceType":"media",
+      "evidenceDescription":"Weird phone calls were made to truck drivers."
+    },
+    {
+      "evidenceType":"witness",
+      "evidenceDescription":"A kid was playing close to one of the crime scenes."
+    }
+  ]
+}
