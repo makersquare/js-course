@@ -64,8 +64,8 @@ var displayPiece = function (element, piece) {
 };
 
 $(document).on('ready', function() {
-  $(document).on('boardChange', displayBoard);
-  $(document).on('boardChange', getMove);
+  Checkers.on('boardChange', displayBoard);
+  Checkers.on('boardChange', getMove);
   $('.col').on('click', updateMove);
   $('.start').on('click', play);
 });
@@ -73,4 +73,4 @@ $(document).on('ready', function() {
 var displayError = function (e, error) {
   $('.error').empty().append(error);
 };
-$(document).on('invalidMove', displayError);
+Checkers.on('invalidMove', displayError);

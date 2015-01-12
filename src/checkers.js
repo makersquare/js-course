@@ -2,7 +2,7 @@
   var board, currentPlayer;
 
   // The public interface
-  window.Checkers = {}
+  window.Checkers = observable({})
 
   Checkers.resetBoard = function () {
     board = Checkers.board = [
@@ -17,20 +17,20 @@
     ];
 
     currentPlayer = 'wht'
-    $(document).trigger('boardChange', board);
+    Checkers.trigger('boardChange', board);
   }
 
   Checkers.attemptMove = function (row1, col1, row2, col2) {
     if (board[row1][col1] == ' X ') {
-      $(document).trigger('invalidMove', "What are you trying to move?");
+      Checkers.trigger('invalidMove', "What are you trying to move?");
       return false;
     } else if (board[row1][col1] != currentPlayer) {
-      $(document).trigger('invalidMove', "That's not your piece");
+      Checkers.trigger('invalidMove', "That's not your piece");
       return false;
     }
 
     if (board[row2][col2] != ' X ') {
-      $(document).trigger('invalidMove', "There's already a piece at the destination");
+      Checkers.trigger('invalidMove', "There's already a piece at the destination");
       return false;
     }
 
@@ -50,12 +50,12 @@
         removePiece(midRow, midCol);
         return true;
       } else {
-        $(document).trigger('invalidMove', "That's just not a valid move");
+        Checkers.trigger('invalidMove', "That's just not a valid move");
         return false;
       }
       // call proper methods
     } else {
-      $(document).trigger('invalidMove', "That's just not a valid move");
+      Checkers.trigger('invalidMove', "That's just not a valid move");
       return false;
     }
   };
@@ -66,15 +66,15 @@
     board[row1][col1] = ' X ';
     board[row2][col2] = piece;
     currentPlayer = currentPlayer == 'red' ? 'wht' : 'red';
-    $(document).trigger('boardChange', board);
-    $(document).trigger('moveMade', currentPlayer, row1, col1, row2, col2);
+    Checkers.trigger('boardChange', board);
+    Checkers.trigger('moveMade', currentPlayer, row1, col1, row2, col2);
   }
 
   function removePiece (row, col) {
     var enemy = board[row][col];
     board[row][col] = ' X ';
-    $(document).trigger('boardChange', board);
-    $(document).trigger('pieceTaken', currentPlayer, enemy, row, col);
+    Checkers.trigger('boardChange', board);
+    Checkers.trigger('pieceTaken', currentPlayer, enemy, row, col);
   }
 
   // Checkers
@@ -87,4 +87,37 @@
   // It is game over
   // It is stalemate
   // There is potential for a double take
+
+
+  // Below is a helper function to make an object observable.
+  // In a bigger project we would move it into its own file.
+  function observable (obj) {
+    var callbacks = {}, slice = [].slice;
+
+    obj.on = function(events, fn) {
+      if (typeof fn === "function") {
+        events.replace(/\S+/g, function(name, pos) {
+          (callbacks[name] = callbacks[name] || []).push(fn);
+          fn.typed = pos > 0;
+        });
+      }
+      return obj;
+    };
+
+    obj.trigger = function(name) {
+      var args = slice.call(arguments, 1),
+        fns = callbacks[name] || [];
+
+      for (var i = 0, fn; (fn = fns[i]); ++i) {
+        if (!fn.busy) {
+          fn.busy = true;
+          fn.apply(obj, fn.typed ? [name].concat(args) : args);
+          if (fn.one) { fns.splice(i, 1); i--; }
+          fn.busy = false;
+        }
+      }
+      return obj;
+    };
+    return obj;
+  }
 })();

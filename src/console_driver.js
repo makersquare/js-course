@@ -57,6 +57,6 @@ var taunt = function () {
   console.log("Piece Taken! HAHA");
 }
 
-$(document).on('invalidMove', displayError);
-$(document).on('boardChange', displayBoard);
-$(document).on('pieceTaken', taunt);
+Checkers.on('invalidMove', displayError);
+Checkers.on('boardChange', displayBoard);
+Checkers.on('pieceTaken', taunt);
