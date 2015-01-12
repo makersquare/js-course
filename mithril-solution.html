@@ -1,0 +1,17 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="./css/app.css">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+  <div id="board"></div>
+
+  <script src="./vendor/mithril.js"></script>
+  <script src="./src/checkers.js"></script>
+  <script src="./src/mithril_driver.js"></script>
+  <script type="text/javascript">
+    m.module(document.getElementById('board'), Board)
+  </script>
+</body>
+</html>

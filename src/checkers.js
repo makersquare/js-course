@@ -20,6 +20,10 @@
     Checkers.trigger('boardChange', board);
   }
 
+  Checkers.getCurrentPlayer = function () {
+    return currentPlayer;
+  }
+
   Checkers.attemptMove = function (row1, col1, row2, col2) {
     if (board[row1][col1] == ' X ') {
       Checkers.trigger('invalidMove', "What are you trying to move?");

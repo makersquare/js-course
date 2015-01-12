@@ -6,6 +6,9 @@
   height: 50px;
   width: 50px;
 }
+.col:hover { background-color: #555; }
+.col.empty { background-color: red; }
+.col.empty:hover { background-color: red; }
 
 .row {
   height: 50px;
@@ -13,22 +16,22 @@
   margin-bottom: 4px;
 }
 
-.empty {
-  background-color: red;
-}
-
 .red {
   background-color: red;
 }
 
-.white {
+.white, .wht {
   background-color: white;
 }
 
 .piece {
+  cursor: pointer;
   margin: 5px;
   width: 40px;
   height: 40px;
   display: inline-block;
   border-radius: 50%;
+}
+.col.selected .piece {
+  background-color: green;
 }
