@@ -33,19 +33,19 @@ var updateMove = function (e) {
     move.endRow = row;
     move.endCol = col;
     $('.end').empty().append("row: " + row + ", col: " + col);
-    attemptMove(move.startRow, move.startCol, move.endRow, move.endCol);
+    Checkers.attemptMove(move.startRow, move.startCol, move.endRow, move.endCol);
     getMove();
   }
 };
 
 var play = function () {
-  resetBoard();
+  Checkers.resetBoard();
   getMove();
 };
 
 var displayBoard = function () {
-  for (var rowIndex = 0; rowIndex < board.length; rowIndex++) {
-    var row = board[rowIndex];
+  for (var rowIndex = 0; rowIndex < Checkers.board.length; rowIndex++) {
+    var row = Checkers.board[rowIndex];
     for (var colIndex = 0; colIndex < row.length; colIndex++) {
       var rowKey = numToChar[Number(rowIndex)];
       var element = $(".row-" + rowKey).children(".col-" + colIndex);

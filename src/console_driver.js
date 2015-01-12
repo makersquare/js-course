@@ -15,14 +15,14 @@ var displayError = function (e, error) {
 };
 
 var play = function () {
-  resetBoard();
+  Checkers.resetBoard();
 
   while (true) {
     var move = getMove();
     if (move.quit) {
       break;
     }
-    attemptMove(move.startRow, move.startCol, move.endRow, move.endCol);
+    Checkers.attemptMove(move.startRow, move.startCol, move.endRow, move.endCol);
   }
 }
 
@@ -30,8 +30,8 @@ var displayBoard = function () {
   var column = [0, 1, 2, 3, 4, 5, 6, 7];
   console.log("  | " + column.join("   "));
   console.log("-----------------------------------");
-  for (var i = 0; i < board.length; i++) {
-    console.log(numToChar[i] + " |" + board[i].join(" "));
+  for (var i = 0; i < Checkers.board.length; i++) {
+    console.log(numToChar[i] + " |" + Checkers.board[i].join(" "));
   }
 };
 
