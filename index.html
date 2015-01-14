@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>jQuery MVP Quizzy Application Turbo</title>
+</head>
+<body>
+
+	<!-- View -->
+	<form class="quiz-form"></form>
+
+
+
+  <!-- Language Extensions -->
+	<script src="src/ext/globals.js" type="text/javascript"></script>
+  <!-- 3rd Party Libraries -->
+  <script src="https://code.jquery.com/jquery-2.1.1.js" type="text/javascript"></script>
+
+  <!-- Models -->
+  <script src="src/quiz.js" type="text/javascript"></script>
+	<!-- Presenters -->
+	<script src="src/quiz-presenter.js" type="text/javascript"></script>
+
+  <!-- Startup code -->
+	<script type="text/javascript">
+  var seedQuestions = [
+    {
+      content: "What is your favorite thing?",
+      answerIndex: 2,
+      options: [
+        "Apple",
+        "Bird",
+        "Four"
+      ]
+    },
+    {
+      content: "What is your other favorite thing?",
+      answerIndex: 0,
+      options: [
+        "What?",
+        "Umm...",
+        "I don't know"
+      ]
+    }
+  ]
+  seedQuestions.forEach(Quiz.addQuestion)
+
+  QuizPresenter.renderQuizzes()
+	</script>
+</body>
+</html>
