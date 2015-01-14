@@ -1,0 +1,14 @@
+{
+  "id" : "abc123456xyz",
+  "userName":"Some wierd name",
+  "hobbies":[
+    {
+      "name":"Plastic bottles collector",
+      "category":"unusual"
+    },
+    {
+      "name":"Code",
+      "category":"Cool!"
+    }
+  ]
+}
