@@ -13,5 +13,5 @@ Then start the server, you need to type:
 
 `$ http-server`
 
-Now you can access to the project using the direction provided. Tipicaly 'http://0.0.0.0:8081'.ß
+Now you can access to the project using the direction provided. Tipicaly 'http://0.0.0.0:8081'.
 
