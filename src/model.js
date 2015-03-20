@@ -7,7 +7,6 @@
   var peeps = []
 
   window.PersonList = {
-    array: [],
 
     rotate: function () {
       // Variable for terseness
