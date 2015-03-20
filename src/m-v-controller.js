@@ -49,7 +49,7 @@
 
   // This function inserts the view into a given DOM element.
   People.render = function (element) {
-    var peopleDOM = People.view(People.controller)
+    var peopleDOM = People.view()
     $(element).empty().append(peopleDOM)
   }
 
