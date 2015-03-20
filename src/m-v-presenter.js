@@ -44,7 +44,7 @@
 
   People.view = function () {
     return $('<div class="people">').append(
-      $('h3').text("All People:"),
+      $('<h3>').text("All People:"),
       // Note how there is no click handler here
       $('<button class="rotate">').text('Rotate')
     )
