@@ -1,46 +1,51 @@
 (function () {
   // // // // // //
-  // M V Presenter
+  // M V Backbone
   // // // // // //
 
 
+  // Component namespace
   window.People = {}
 
   // Presenter constructor
-  People.Presenter = function (element) {
+  People.Presenter = Backbone.View.extend({
 
-    // The view itself
-    var $view = $(element)
+    initialize: function () {
+      // Model Listener
+      // Here the Presenter listens to the Model.
+      // When it hears an event, it updates the View accordingly.
+      this.listenTo(this.collection, 'add remove', this.render)
+    },
 
     // View Listeners
     // Here the Presenter listens to the View.
     // When it hears an event, it updates the Model accordingly.
-    $view.on('click', '.rotate', function(e) {
+    events: {
+      'click .rotate': 'rotate',
+      'click .remove': 'remove'
+    },
+
+    rotate: function (e) {
       // This is not very special (but it could be!)
       e.preventDefault()
-      PersonList.rotate()
-    })
-    $view.on('click', '.remove', function(e) {
+      this.collection.rotate()
+    },
+    remove: function(e) {
       e.preventDefault()
       var personId = $(e.currentTarget).attr('data-id')
-      PersonList.remove(personId)
-    })
+      this.collection.remove(personId)
+    },
 
     // This is the function that puts the view on the page.
-    this.render = function () {
-      $view.empty().append(
+    render: function () {
+      this.$el.empty().append(
         People.view(),
         // As shown here, the Presenter is the one responsible for
         // getting data from the model and sending it to the view.
-        PersonList.map(personView)
+        this.collection.map(personView)
       )
     }
-
-    // Model Listener
-    // Here the Presenter listens to the Model.
-    // When it hears an event, it updates the View accordingly.
-    App.pubsub.on('change:personList', this.render)
-  }
+  })
 
   People.view = function () {
     return $('<div class="people">').append(
@@ -53,15 +58,15 @@
   // Helper view
   function personView (person) {
     return $('<div class="person">').append(
-      $('<p>').append("Name: ", person.name),
-      $('<p>').append("Age: ", person.age),
+      $('<p>').append("Name: ", person.get('name')),
+      $('<p>').append("Age: ", person.get('age')),
       $('<a href="#" class="remove">').text('Remove').attr('data-id', person.id)
     )
   }
 
   // The function actually puts the view on the page.
-  People.mount = function (element) {
-    var presenter = new People.Presenter(element)
+  People.mount = function (element, collection) {
+    var presenter = new People.Presenter({ el: element, collection: collection })
     presenter.render()
   }
 
