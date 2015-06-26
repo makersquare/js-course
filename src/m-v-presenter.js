@@ -18,12 +18,12 @@
     $view.on('click', '.rotate', function(e) {
       // This is not very special (but it could be!)
       e.preventDefault()
-      PersonList.rotate()
+      Roster.rotate()
     })
     $view.on('click', '.remove', function(e) {
       e.preventDefault()
       var personId = $(e.currentTarget).attr('data-id')
-      PersonList.remove(personId)
+      Roster.remove(personId)
     })
 
     // This is the function that puts the view on the page.
@@ -32,14 +32,14 @@
         People.view(),
         // As shown here, the Presenter is the one responsible for
         // getting data from the model and sending it to the view.
-        PersonList.map(personView)
+        Roster.map(personView)
       )
     }
 
     // Model Listener
     // Here the Presenter listens to the Model.
     // When it hears an event, it updates the View accordingly.
-    App.pubsub.on('change:personList', this.render)
+    App.pubsub.on('change:roster', this.render)
   }
 
   People.view = function () {

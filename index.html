@@ -18,16 +18,16 @@
   var elem = $("#app")
 
   // Note how it doesn't matter whether we add data before...
-  PersonList.add({ id: 100, name: 'Zero', age: 0 })
+  Roster.add({ id: 100, name: 'Zero', age: 0 })
 
   People.mount(elem)
 
   // ...or after we mount the view onto the page :)
-  PersonList.add({ id: 101, name: 'Alice', age: 25 })
-  PersonList.add({ id: 102, name: 'Bob', age: 14 })
+  Roster.add({ id: 101, name: 'Alice', age: 25 })
+  Roster.add({ id: 102, name: 'Bob', age: 14 })
 
   // Try running the following line in your console
-  // PersonList.add({ id: 103, name: 'Christine', age: 31 })
+  // Roster.add({ id: 103, name: 'Christine', age: 31 })
 </script>
 
 </body>

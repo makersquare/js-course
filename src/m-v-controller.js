@@ -12,7 +12,7 @@
     rotate: function (e) {
       // This is not very special (but it could be!)
       e.preventDefault()
-      PersonList.rotate()
+      Roster.rotate()
     }
   }
 
@@ -25,7 +25,7 @@
       $('<button>').text('Rotate').on('click', People.controller.rotate),
 
       // Example of the View reading from the Model
-      PersonList.map(personView)
+      Roster.map(personView)
     )
   }
   // Helper view
@@ -37,7 +37,7 @@
       // Example of the View manipulating the Model
       $('<a href="#">').text('Remove').on('click', function(e) {
         e.preventDefault()
-        PersonList.remove(person.id)
+        Roster.remove(person.id)
       })
     )
   }
@@ -57,7 +57,7 @@
   // then gets ready to update the view on model changes.
   People.mount = function (element) {
     People.render(element)
-    App.pubsub.on('change:personList', function() {
+    App.pubsub.on('change:roster', function() {
       People.render(element)
     })
   }
