@@ -19,7 +19,7 @@
   // Views
   People.view = function () {
     return $('<div class="people">').append(
-      $('h3').text("All People:"),
+      $('<h3>').text("All People:"),
 
       // Example of the View connecting to a Controller action
       $('<button>').text('Rotate').on('click', People.controller.rotate),
