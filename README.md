@@ -1,3 +1,5 @@
+Open up `index.html` in your browser and take a minute to explore, then answer the following questions.
+
 # Model Questions
 
 Take a look at `src/models.js` and answer the following questions:
